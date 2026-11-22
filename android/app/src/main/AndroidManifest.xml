@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        tools:targetApi="31"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation|density"
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBarLaunch"
+            android:launchMode="singleTask"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <!-- PairWood porta con sé il ritorno dall'accesso a Google (per BothWise): qui non si usa, si toglie -->
+        <activity android:name="pairwood.sdk.RitornoGoogleActivity" tools:node="remove" />
+        <activity
+            android:name=".FotocameraActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:configChanges="keyboardHidden|screenSize|smallestScreenSize|screenLayout" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+    </application>
+
+    <!-- Permessi: solo quelli che servono. INTERNET lo chiede la WebView per caricare la pagina locale;
+         la regola di sicurezza (CSP) della pagina blocca comunque ogni connessione verso l'esterno. -->
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- aggiornamenti dell'app da GitHub: Android chiede comunque la conferma a ogni installazione -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!-- vibrazione dei tocchi (la WebView la ignora senza questo permesso) -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- fotocamera di DoctorWood (rilievi e schede); l'app funziona anche su dispositivi senza fotocamera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <!-- la schermata della fotocamera è verticale, ma l'app va bene anche sui tablet usati in orizzontale -->
+    <uses-feature android:name="android.hardware.screen.portrait" android:required="false" />
+
+    <!-- Android 11+: per «Usa la fotocamera del telefono» l'app deve poter vedere l'app fotocamera di sistema. -->
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+</manifest>

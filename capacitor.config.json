@@ -1,0 +1,11 @@
+{
+  "appId": "it.doctorwood.app",
+  "appName": "DoctorWood",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": false,
+    "webContentsDebuggingEnabled": false
+  },
+  "backgroundColor": "#1e293b"
+}

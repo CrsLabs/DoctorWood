@@ -1,0 +1,77 @@
+/* Stile comune di guida e tutorial di DoctorWood. I PDF li crea genera-guida.js. */
+@page { size: A4; margin: 16mm 15mm 18mm 15mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5pt; line-height: 1.5; margin: 0; }
+h1 { font-size: 22pt; color: #7c2d12; margin: 0 0 4mm; }
+h2 { font-size: 15pt; color: #7c2d12; margin: 0 0 3mm; padding-bottom: 1.5mm; border-bottom: 2px solid #f59e0b; break-after: avoid; }
+h2 .num { display: inline-block; min-width: 9mm; color: #b45309; }
+h3 { font-size: 11.5pt; margin: 5mm 0 1.5mm; color: #0f172a; break-after: avoid; }
+p { margin: 0 0 2.5mm; }
+ul, ol { margin: 0 0 3mm 5mm; padding-left: 4mm; }
+li { margin-bottom: 1mm; }
+b, strong { color: #0f172a; }
+.sezione { break-before: page; position: relative; }
+.segno { position: absolute; left: 0; top: 0; font-size: 1px; color: #fff; }
+
+/* copertina */
+.copertina { height: 258mm; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(#ffffff, #fff7e6); border-radius: 6mm; }
+.copertina img.logo { width: 46mm; height: 46mm; border-radius: 10mm; box-shadow: 0 3mm 8mm rgba(0,0,0,.25); }
+.copertina .titolo { font-size: 36pt; font-weight: 800; margin-top: 10mm; color: #1e293b; }
+.copertina .titolo span { color: #b45309; }
+.copertina .motto { font-size: 15pt; color: #475569; margin-top: 2mm; }
+.copertina .tipo { margin-top: 12mm; font-size: 17pt; font-weight: 700; color: #7c2d12; }
+.copertina .tipo-sotto { font-size: 11pt; color: #64748b; margin-top: 1mm; }
+.copertina .ver { margin-top: 16mm; font-size: 10pt; color: #64748b; }
+
+/* indice con i numeri di pagina */
+.indice { list-style: none; margin: 0; padding: 0; }
+.indice .parte { margin: 4mm 0 1.5mm; font-weight: 800; color: #b45309; font-size: 10pt; text-transform: uppercase; letter-spacing: .06em; }
+.indice .voce { display: flex; align-items: baseline; gap: 2mm; margin: 0 0 1.2mm 3mm; }
+.indice .voce .t { white-space: nowrap; }
+.indice .voce .t small { color: #64748b; font-weight: 400; }
+.indice .voce .punti { flex: 1; border-bottom: 1px dotted #94a3b8; transform: translateY(-1mm); }
+.indice .voce .pag { min-width: 6mm; text-align: right; font-weight: 700; }
+.come-leggere { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin-top: 6mm; }
+.come-leggere div { border: 1px solid #e2e8f0; border-radius: 3mm; padding: 3mm 4mm; font-size: 9.5pt; }
+
+/* pagina di apertura di una parte */
+.apertura { break-before: page; height: 250mm; display: flex; flex-direction: column; justify-content: center; padding: 0 10mm; position: relative; }
+.apertura .n { font-size: 11pt; font-weight: 800; color: #b45309; letter-spacing: .12em; text-transform: uppercase; }
+.apertura .nome { font-size: 30pt; font-weight: 800; color: #1e293b; margin: 2mm 0 5mm; border-bottom: 3px solid #f59e0b; padding-bottom: 3mm; }
+.apertura ul { list-style: none; margin: 0; padding: 0; font-size: 12pt; }
+.apertura li { margin-bottom: 2mm; color: #334155; }
+.apertura li::before { content: "›"; color: #f59e0b; font-weight: 800; margin-right: 3mm; }
+
+/* testo e immagini */
+.coppia { display: grid; grid-template-columns: 46mm 1fr; gap: 7mm; margin: 3mm 0 5mm; align-items: start; break-inside: avoid; }
+.coppia.doppia { grid-template-columns: 46mm 46mm 1fr; }
+figure { margin: 0; }
+figure img { width: 100%; border: 1px solid #cbd5e1; border-radius: 4mm; box-shadow: 0 1mm 3mm rgba(0,0,0,.15); display: block; }
+figcaption { font-size: 8.5pt; color: #64748b; margin-top: 1.5mm; text-align: center; }
+.nota { background: #fffbeb; border-left: 3px solid #f59e0b; padding: 2.5mm 4mm; margin: 3mm 0; border-radius: 0 2mm 2mm 0; break-inside: avoid; }
+.attenzione { background: #fef2f2; border-left: 3px solid #e11d48; padding: 2.5mm 4mm; margin: 3mm 0; border-radius: 0 2mm 2mm 0; break-inside: avoid; }
+.dove { display: inline-block; font-size: 8.5pt; color: #475569; background: #f1f5f9; border-radius: 2mm; padding: .3mm 2mm; margin-bottom: 2mm; }
+.passi { counter-reset: p; list-style: none; margin-left: 0; padding-left: 0; }
+.passi li { counter-increment: p; position: relative; padding-left: 8mm; margin-bottom: 2mm; }
+.passi li::before { content: counter(p); position: absolute; left: 0; top: 0.3mm; width: 5.5mm; height: 5.5mm; border-radius: 50%; background: #f59e0b; color: #1e293b; font-weight: 700; font-size: 8.5pt; text-align: center; line-height: 5.5mm; }
+table { border-collapse: collapse; width: 100%; margin: 2mm 0 4mm; font-size: 9.5pt; }
+th, td { border: 1px solid #cbd5e1; padding: 1.5mm 2.5mm; text-align: left; vertical-align: top; }
+th { background: #f1f5f9; }
+tr { break-inside: avoid; }
+.piccolo { font-size: 8.5pt; color: #64748b; }
+
+/* tutorial: una scheda per ogni «come si fa» */
+.gruppo { break-before: page; position: relative; }
+.tut { position: relative; break-inside: avoid; margin: 0 0 5mm; padding: 3.5mm 4.5mm; border: 1px solid #e2e8f0; border-radius: 3mm; overflow: hidden; }
+.tut h3 { margin: 0 0 1mm; font-size: 12pt; }
+.tut h3 .n { color: #b45309; margin-right: 2mm; }
+.tut .quando { font-size: 9pt; color: #64748b; margin: 0 0 2mm; }
+.tut ol { margin-bottom: 1mm; }
+.tut img { width: 32mm; float: right; margin: 0 0 2mm 5mm; border: 1px solid #cbd5e1; border-radius: 3mm; }
+.tut .vedi { font-size: 8.5pt; color: #64748b; margin: 1mm 0 0; }
+.indice.due { column-count: 2; column-gap: 8mm; }
+.indice.due .parte { break-after: avoid; }
+.indice.due .voce { break-inside: avoid; font-size: 9.5pt; margin-bottom: .8mm; }
+.indice.due .voce .t { white-space: normal; }
+.indice.due .blocco-indice { break-inside: avoid; display: block; }

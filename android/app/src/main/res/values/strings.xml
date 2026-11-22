@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DoctorWood</string>
+    <string name="title_activity_main">DoctorWood</string>
+    <string name="package_name">it.doctorwood.app</string>
+    <string name="custom_url_scheme">it.doctorwood.app</string>
+</resources>

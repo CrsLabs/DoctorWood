@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Solo cartelle private dell'app:
+     - aperti/condivisi: file temporanei aperti o condivisi su richiesta dell'utente;
+     - Pictures: la foto appena scattata con «Scatta foto» (la usa Capacitor per la fotocamera). -->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <cache-path name="aperti" path="aperti/" />
+    <cache-path name="condivisi" path="condivisi/" />
+    <!-- l'aggiornamento scaricato e già controllato, da passare all'installazione di Android -->
+    <cache-path name="aggiornamenti" path="aggiornamenti/" />
+    <external-files-path name="foto_scattate" path="Pictures/" />
+</paths>

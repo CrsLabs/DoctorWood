@@ -1,0 +1,8 @@
+{
+ "pacchetto": "it.doctorwood.app",
+ "versionCode": 47,
+ "versione": "1.1.0",
+ "apk": "DoctorWood-1.1.0.apk",
+ "sha256": "d49f6fa6e311fbb5eca30a34f665fa26a3c15dcf00ca9d3f54a9f6454ade92ac",
+ "novita": "Prima versione pubblica: aggiornamenti automatici da GitHub (anche sul tablet), tablet «solo laboratorio», guida e tutorial nuovi."
+}
