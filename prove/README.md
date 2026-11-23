@@ -15,7 +15,7 @@ Then, in this order:
 | `azioni.py` | Static check: every `data-click` and every `az(...)` has its entry in `AZIONI` (a button with no entry does nothing). | `python3 prove/azioni.py` |
 | `guida-passi.js` | Guided new job and new quote (steps, choices, creation). | `node prove/guida-passi.js` |
 | `correzioni2.js` | Checks on VAT number, tax code, IBAN, email and phone; confirmation when leaving guided paths; survey/quote/cutting sequence; quote that empties itself. | `node prove/correzioni2.js` |
-| `notifiche.js` | Messages close by swiping and don't block the controls underneath. | `node prove/notifiche.js` |
+| `notifiche.js` | Messages appear at the bottom, close by swiping (sideways or down) and don't block the controls underneath. | `node prove/notifiche.js` |
 | `rilievo-scarta.js` | «Non salvare» (don't save) in the Survey puts everything back as it was. | `node prove/rilievo-scarta.js` |
 | `schiena.js` | From a model: back panel on a separate sheet and stock warning. | `node prove/schiena.js` |
 | `scenari.js` | A real user's path (taps only): first start, job, customer, quote, stock, calendar, sheets, cutting, survey, encrypted backup there and back, Workshop with PIN, Settings. Saves `risultati/dati-realistici.json`, needed by the robot and the guide screenshots. | `node prove/scenari.js` |

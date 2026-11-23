@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- App completamente offline: nessuna risorsa esterna. Questa regola impedisce qualsiasi connessione di rete. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-6E9ZPjhB2drbdDdW1sE0+K5PUYv5JaKHJAmBKIzJZ2o='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-qa7guAMZYPBazFPQ7q+PoiG+Kjp/7cF5D7WvOuDkDnM='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
   <!-- Il browser non deve proporre traduzioni online, controllo ortografico online ne' prefetch DNS -->
   <meta name="google" content="notranslate">
@@ -2506,7 +2506,7 @@ html[data-tema="chiaro"] .marchio{border-color:#1e293b}
     </div>
   </div>
 
-  <div id="avvisoGuardia" role="alert" aria-live="assertive" class="hidden no-print" style="position:fixed;left:12px;right:12px;top:12px;z-index:100">
+  <div id="avvisoGuardia" role="alert" aria-live="assertive" class="hidden no-print" style="position:fixed;left:12px;right:12px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:100">
     <div class="max-w-xl mx-auto flex items-start gap-3 rounded-xl p-3 text-sm shadow-xl">
       <span id="avvisoGuardiaIcona" class="esito-icona" aria-hidden="true"></span>
       <span id="avvisoGuardiaTesto" class="flex-1" style="white-space:pre-line;align-self:center"></span>
@@ -16121,27 +16121,38 @@ SOFTWARE.</pre></details>
       document.getElementById('avvisoGuardiaIcona').innerHTML = ICONE_ESITO[tipo];
       el.dataset.tipo = tipo;
       el.setAttribute('aria-live', tipo === 'errore' || tipo === 'blocco' ? 'assertive' : 'polite');
-      // entra scendendo piano dall'alto, con la molla; se ce n'era già uno, il nuovo «respira» al suo posto
+      // entra salendo piano dal basso, con la molla; se ce n'era già uno, il nuovo «respira» al suo posto
       const giaVisibile = !el.classList.contains('hidden') && !el.dataset.esce;
       delete el.dataset.esce;
       if (avvisoGuardia.anim) { avvisoGuardia.anim.cancel(); avvisoGuardia.anim = null; }
+      posizionaInBasso(el);
       el.classList.remove('hidden');
       if (animazioniAttive() && el.animate) avvisoGuardia.anim = giaVisibile
         ? el.animate([{ transform: 'scale(0.97)' }, { transform: 'none' }], { duration: 320, easing: 'cubic-bezier(0.32, 0.72, 0, 1)' })
-        : el.animate([{ opacity: 0, transform: 'translateY(-26px) scale(0.96)' }, { opacity: 1, transform: 'none' }], { duration: 560, easing: 'cubic-bezier(0.32, 0.72, 0, 1)' });
+        : el.animate([{ opacity: 0, transform: 'translateY(26px) scale(0.96)' }, { opacity: 1, transform: 'none' }], { duration: 560, easing: 'cubic-bezier(0.32, 0.72, 0, 1)' });
       try { window.dispatchEvent(new CustomEvent('esito', { detail: { testo, tipo } })); } catch (_) {}
       clearTimeout(avvisoGuardia.timer);
       // regola del titolare: nessun avviso resta più di 10 secondi (errori e avvisi importanti arrivano al massimo)
       avvisoGuardia.timer = setTimeout(nascondiEsito, resta || tipo === 'errore' || tipo === 'blocco' ? 10000 : { ok: 3500, annullato: 3500 }[tipo] || 6000);
     }
-    // se ne va salendo e sfumando, senza sparire di colpo
+    // le notifiche stanno in basso, appena sopra la barra delle sezioni (e sopra l'avviso del backup, se c'è)
+    function posizionaInBasso(el) {
+      let alto = 0;
+      ['bottomNav', 'avvisoBackup'].forEach(id => {
+        const b = document.getElementById(id);
+        if (!b || b === el || b.classList.contains('hidden') || getComputedStyle(b).display === 'none') return;
+        const r = b.getBoundingClientRect(); if (r.height) alto = Math.max(alto, innerHeight - r.top);
+      });
+      el.style.bottom = alto ? (alto + 10) + 'px' : 'calc(16px + env(safe-area-inset-bottom))';
+    }
+    // se ne va scendendo e sfumando, senza sparire di colpo
     function nascondiEsito() {
       const el = document.getElementById('avvisoGuardia');
       if (!el || el.classList.contains('hidden')) return;
       clearTimeout(avvisoGuardia.timer);
       if (!(animazioniAttive() && el.animate)) { el.classList.add('hidden'); return; }
       el.dataset.esce = '1';
-      const a = avvisoGuardia.anim = el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-22px) scale(0.97)' }], { duration: 650, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)', fill: 'forwards' });
+      const a = avvisoGuardia.anim = el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(22px) scale(0.97)' }], { duration: 650, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)', fill: 'forwards' });
       a.onfinish = () => { if (el.dataset.esce) { el.classList.add('hidden'); delete el.dataset.esce; } a.cancel(); if (avvisoGuardia.anim === a) avvisoGuardia.anim = null; };
     }
     const esito = avvisoGuardia;
@@ -16204,7 +16215,8 @@ SOFTWARE.</pre></details>
       document.addEventListener('mousemove', e => muovi(e.clientX, e.clientY, 'm'), opz);
       document.addEventListener('mouseup', () => fine('m'), opz);
     }
-    scorriPerChiudere(document.getElementById('avvisoGuardia'), () => { clearTimeout(avvisoGuardia.timer); if (avvisoGuardia.anim) { avvisoGuardia.anim.cancel(); avvisoGuardia.anim = null; } const e = document.getElementById('avvisoGuardia'); e.classList.add('hidden'); delete e.dataset.esce; }, 'su', true);
+    scorriPerChiudere(document.getElementById('avvisoGuardia'), () => { clearTimeout(avvisoGuardia.timer); if (avvisoGuardia.anim) { avvisoGuardia.anim.cancel(); avvisoGuardia.anim = null; } const e = document.getElementById('avvisoGuardia'); e.classList.add('hidden'); delete e.dataset.esce; }, 'giu', true);
+    scorriPerChiudere(document.getElementById('avvisoUscita'), () => document.getElementById('avvisoUscita').classList.add('hidden'), 'giu', true);
     scorriPerChiudere(document.getElementById('avvisoBackup'), rimandaBackup, 'giu');
     function decodificaSicura(t) { try { return decodeURIComponent(t); } catch (_) { return t; } }
     function messaggioUscita(href) {
