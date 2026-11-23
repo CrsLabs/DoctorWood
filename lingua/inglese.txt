@@ -2358,3 +2358,4 @@ Ieri => Yesterday
 DoctorWood => DoctorWood
 # di # senza lavoro => # of # without a job
 @ di @ senza lavoro => @ of @ without a job
+DoctorWood parla anche inglese: Impostazioni → Aspetto → Lingua. Anche i PDF, la fotocamera e l'impronta seguono la lingua scelta. => DoctorWood now speaks English too: Settings → Appearance → Language. PDFs, the camera and the fingerprint prompts follow the chosen language as well.

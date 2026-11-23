@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- App completamente offline: nessuna risorsa esterna. Questa regola impedisce qualsiasi connessione di rete. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-xdsmiRt8DWbX64mq25iDqj0fawPfKpF4n2rm7w7omak='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-7VRTFFkfg719j8MeDzt/lju/JhhuLz7cs+f8smJnaxw='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
   <!-- Il browser non deve proporre traduzioni online, controllo ortografico online ne' prefetch DNS -->
   <meta name="google" content="notranslate">
@@ -3850,6 +3850,7 @@ SOFTWARE.</pre></details>
   "DoctorWood - distinta di taglio": "DoctorWood - cutting list",
   "DoctorWood bloccato": "DoctorWood locked",
   "DoctorWood non si collega a niente: il messaggio passa alla tua app di posta o a quella che scegli, e parte solo quando lo spedisci tu.": "DoctorWood doesn't connect to anything: the message goes to your email app or the one you choose, and leaves only when you send it.",
+  "DoctorWood parla anche inglese: Impostazioni → Aspetto → Lingua. Anche i PDF, la fotocamera e l'impronta seguono la lingua scelta.": "DoctorWood now speaks English too: Settings → Appearance → Language. PDFs, the camera and the fingerprint prompts follow the chosen language as well.",
   "DoctorWood usa questi componenti, ciascuno con la sua licenza; il resto del codice è originale. Quelli dopo i primi due sono solo nell'app Android.": "DoctorWood uses these components, each with its own licence; the rest of the code is original. Those after the first two are only in the Android app.",
   "DoctorWood · laboratorio": "DoctorWood · workshop",
   "DoctorWood è gratis, senza pubblicità e senza raccogliere dati. Se ti è utile, puoi offrire un caffè allo sviluppatore su Ko-fi: si apre nel browser, l'app non invia niente.": "DoctorWood is free, with no ads and no data collection. If you find it useful, you can buy the developer a coffee on Ko-fi: it opens in the browser, the app sends nothing.",
@@ -10361,7 +10362,7 @@ SOFTWARE.</pre></details>
     // ======================================================================
     // ===== SEGNALAZIONI ALLO SVILUPPATORE (senza internet) =====
     // ======================================================================
-    const VERSIONE_APP = '1.1.1';   // uguale a versionName in android/app/build.gradle
+    const VERSIONE_APP = '1.2.0';   // uguale a versionName in android/app/build.gradle
     // Dati dello sviluppatore per «Informazioni e licenze»: si mostrano solo le voci compilate
     const SVILUPPATORE = { nome: '', ditta: 'CrsLabs', email: 'crslabs.info@gmail.com', telefono: '', sito: '', indirizzo: '', partitaIva: '' };
     const TITOLARE_COPYRIGHT = 'CrsLabs';   // ← nome o ditta nella riga «© 2026 …» (vuoto: «DoctorWood»)
