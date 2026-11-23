@@ -237,7 +237,7 @@ const URL = process.argv[2] || 'http://localhost:8766/sorgente-DoctorWood.html';
   await passo('Impostazioni: tutte le sezioni', async () => {
     await chiudiTutto();
     await p.evaluate(() => apriImpostazioni()); await p.waitForTimeout(400);
-    const cats = await p.evaluate(() => [...document.querySelectorAll('#catImpostazioni .cat-imp')].map(c => c.dataset.cat));
+    const cats = await p.evaluate(() => [...document.querySelectorAll('#catImpostazioni .cat-imp')].filter(c => !c.classList.contains('hidden')).map(c => c.dataset.cat));   // «Aggiornamenti» c'è solo nell'app Android
     for (const c of cats) { await tocca(`#catImpostazioni [data-cat="${c}"] .cat-testa`, 300); }
     esito('sezioni aperte una per volta', cats.length >= 9, cats.join(','));
     await chiudiTutto();

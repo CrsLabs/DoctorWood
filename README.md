@@ -5,7 +5,7 @@
 <h1 align="center">DoctorWood</h1>
 <p align="center"><b>Il gestionale per la falegnameria, anche senza internet.</b></p>
 
-<p align="center">Android 10+ · v1.1.0 · Anche su PC · Gratis e open source (GPL-3.0)</p>
+<p align="center">Android 10+ · v1.1.1 · Anche su PC · Gratis e open source (GPL-3.0)</p>
 
 ---
 

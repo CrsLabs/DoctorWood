@@ -862,8 +862,6 @@
           : t ? 'È uscita DoctorWood ' + t.versione + ' (' + mbAgg(t.dimensione) + ').' + (t.novita ? '\nNovità: ' + t.novita : '')
           : o.errore ? 'Ultimo controllo ' + quandoAgg(o.ultimo) + ': ' + o.errore
           : 'Hai l\'ultima versione. Ultimo controllo: ' + quandoAgg(o.ultimo) + '.' + (o.attivo ? '' : ' Il controllo settimanale è spento.');
-        const r = $('catRiass_aggiornamenti');
-        if (r) r.textContent = t ? 'Nuova versione ' + t.versione + ' · tocca per installarla' : (o.attivo ? 'Ogni settimana' : 'Controllo spento') + ' · ultimo controllo ' + quandoAgg(o.ultimo);
       }
       // chiede a GitHub; «aMano»: dal tasto (dice sempre com'è andata)
       async function controllaAggiornamenti(aMano) {

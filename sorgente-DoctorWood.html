@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- App completamente offline: nessuna risorsa esterna. Questa regola impedisce qualsiasi connessione di rete. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-9pmFXKOYvSshjgK4FXxvkTKUS6fIOK/8yJT0f4Hk5XI='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-XUSbWfuT2BUh0j04frQdrB57jDYfdMZLzWrEwTa6DnY='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
   <!-- Il browser non deve proporre traduzioni online, controllo ortografico online ne' prefetch DNS -->
   <meta name="google" content="notranslate">
@@ -1074,7 +1074,7 @@ html[data-tema="chiaro"] .su-scuro .text-teal-300,html[data-tema="chiaro"] .su-s
 html[data-tema="chiaro"] .su-scuro .text-teal-400,html[data-tema="chiaro"] .su-scuro.text-teal-400{color:#2dd4bf}
 html[data-tema="chiaro"] { color-scheme: light; }
 html[data-tema="scuro"] { color-scheme: dark; }
-html[data-tema="chiaro"] body.bg-slate-900 { background-color: #eef2f6; }
+html[data-tema="chiaro"] body.bg-slate-900 { background-color: #f8fafc; }
 html[data-tema="chiaro"] .navBtn { color: #64748b; }
 html[data-tema="chiaro"] .navBtn.attivo { color: #b45309; }
 html[data-tema="chiaro"] .navBtn[data-nav="photoSurvey"].attivo, html[data-tema="chiaro"] .navBtn[data-nav="agendaTool"].attivo { color: #0369a1; }
@@ -2627,6 +2627,7 @@ html[data-tema="chiaro"] .marchio{border-color:#1e293b}
               <button type="button" role="radio" data-tema="chiaro" data-click="scegliTema('chiaro')" class="opz-imp"><i class="fa-solid fa-tema-chiaro"></i>Chiaro</button>
               <button type="button" role="radio" data-tema="scuro" data-click="scegliTema('scuro')" class="opz-imp"><i class="fa-solid fa-tema-scuro"></i>Scuro</button>
             </div>
+            <button type="button" id="animBtn" role="switch" aria-checked="true" data-click="cambiaAnimazioni()" class="riga-imp w-full flex items-center gap-3 rounded-xl bg-slate-900 border border-slate-700 px-3 text-left"><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Animazioni</span><span class="block text-[11px] text-slate-400">Movimenti morbidi di finestre e sezioni</span></span><span class="interruttore" aria-hidden="true"></span></button>
             <p class="text-[11px] text-slate-400">Automatico segue il telefono.</p>
             <p class="text-sm font-semibold text-white" style="margin-top:6px">Dimensione del testo</p>
             <div id="sceltaTesto" role="radiogroup" aria-label="Dimensione del testo" class="grid grid-cols-3 gap-2">
@@ -2635,7 +2636,6 @@ html[data-tema="chiaro"] .marchio{border-color:#1e293b}
               <button type="button" role="radio" data-testo="130" data-click="scegliTesto(130)" class="opz-imp"><span aria-hidden="true" style="font-size:20px;font-weight:800">Aa</span>Molto grande</button>
             </div>
             <p class="text-[11px] text-slate-400">Ingrandisce le scritte di tutta l'app, solo su questo dispositivo (nella pagina web: sul computer).</p>
-            <button type="button" id="animBtn" role="switch" aria-checked="true" data-click="cambiaAnimazioni()" class="riga-imp w-full flex items-center gap-3 rounded-xl bg-slate-900 border border-slate-700 px-3 text-left"><i class="fa-solid fa-wand-magic-sparkles text-lg text-slate-300"></i><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Animazioni</span><span class="block text-[11px] text-slate-400">Passaggi morbidi tra le sezioni</span></span><span class="interruttore" aria-hidden="true"></span></button>
           </div>
         </div>
         <div class="cat-imp" data-cat="vibrazione">
@@ -2827,16 +2827,16 @@ html[data-tema="chiaro"] .marchio{border-color:#1e293b}
         </div>
         <div class="cat-imp hidden" data-cat="aggiornamenti" id="catAggiornamenti">
           <button type="button" class="cat-testa" aria-expanded="false" aria-controls="catCorpo_aggiornamenti" data-click="apriCatImp('aggiornamenti')">
-            <span class="cat-icona" style="color:#38bdf8"><i class="fa-solid fa-rotate-right"></i></span>
-            <span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Aggiornamenti</span><span id="catRiass_aggiornamenti" class="block text-[11px] text-slate-400 truncate"></span></span>
+            <span class="cat-icona" style="color:#34d399"><i class="fa-solid fa-download"></i></span>
+            <span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Aggiornamenti</span><span id="catRiass_aggiornamenti" class="block text-[11px] text-slate-400 truncate">Le nuove versioni di DoctorWood</span></span>
             <i class="fa-solid fa-chevron-right cat-freccia text-slate-400 text-xs"></i>
           </button>
           <div id="catCorpo_aggiornamenti" class="cat-corpo hidden">
-            <button type="button" id="impAggiornamenti" role="switch" aria-checked="true" class="riga-imp w-full flex items-center gap-3 rounded-xl bg-slate-900 border border-slate-700 px-3 text-left"><i class="fa-solid fa-rotate-right text-lg text-sky-400"></i><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Controlla una volta a settimana</span><span class="block text-[11px] text-slate-400">Se c'è una versione nuova te lo dico: decidi tu se installarla</span></span><span class="interruttore" aria-hidden="true"></span></button>
+            <button type="button" id="impAggiornamenti" role="switch" aria-checked="true" class="riga-imp w-full flex items-center gap-3 rounded-xl bg-slate-900 border border-slate-700 px-3 text-left"><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Controlla una volta a settimana</span><span class="block text-[11px] text-slate-400">Se c'è una versione nuova te lo dico: decidi tu se installarla</span></span><span class="interruttore" aria-hidden="true"></span></button>
             <p id="aggStato" class="text-xs text-slate-300" role="status" style="white-space:pre-line"></p>
             <button type="button" id="aggInstalla" class="hidden w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl px-4 py-3 text-base"><i class="fa-solid fa-download mr-1.5"></i>Aggiorna</button>
-            <button type="button" id="aggControlla" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold rounded-xl px-4 py-3 text-sm">Controlla adesso</button>
-            <p class="text-[11px] text-slate-400">Le versioni nuove arrivano da GitHub (github.com/CrsLabs/DoctorWood). Si installano solo se sono firmate come questa app; i tuoi dati restano tutti. Il controllo legge soltanto: nessun tuo dato esce dal dispositivo.</p>
+            <button type="button" id="aggControlla" class="w-full bg-transparent border border-slate-600 hover:bg-slate-800 text-slate-200 font-semibold rounded-xl px-4 py-3 text-sm">Controlla adesso</button>
+            <p class="text-[11px] text-slate-400">Il controllo legge da GitHub, dove è pubblicato DoctorWood: non parte nessun tuo dato. L'aggiornamento si installa solo se è firmato come l'app che hai, e Android chiede sempre la conferma. La prima volta Android chiede anche di permettere a DoctorWood di installare app.</p>
           </div>
         </div>
       </div>
@@ -7920,7 +7920,7 @@ SOFTWARE.</pre></details>
     // ======================================================================
     // ===== SEGNALAZIONI ALLO SVILUPPATORE (senza internet) =====
     // ======================================================================
-    const VERSIONE_APP = '1.1.0';   // uguale a versionName in android/app/build.gradle
+    const VERSIONE_APP = '1.1.1';   // uguale a versionName in android/app/build.gradle
     // Dati dello sviluppatore per «Informazioni e licenze»: si mostrano solo le voci compilate
     const SVILUPPATORE = { nome: '', ditta: 'CrsLabs', email: 'crslabs.info@gmail.com', telefono: '', sito: '', indirizzo: '', partitaIva: '' };
     const TITOLARE_COPYRIGHT = 'CrsLabs';   // ← nome o ditta nella riga «© 2026 …» (vuoto: «DoctorWood»)
