@@ -1,8 +1,8 @@
 {
  "pacchetto": "it.doctorwood.app",
- "versionCode": 47,
- "versione": "1.1.0",
- "apk": "DoctorWood-1.1.0.apk",
- "sha256": "d49f6fa6e311fbb5eca30a34f665fa26a3c15dcf00ca9d3f54a9f6454ade92ac",
- "novita": "Prima versione pubblica: aggiornamenti automatici da GitHub (anche sul tablet), tablet «solo laboratorio», guida e tutorial nuovi."
+ "versionCode": 48,
+ "versione": "1.1.1",
+ "apk": "DoctorWood-1.1.1.apk",
+ "sha256": "415f21459eddea772dfb8a844e5cb70efafb1311fcb8c8be2f7ac093f94c484d",
+ "novita": "Impostazioni come nelle altre app CrsLabs: Aspetto (tema, animazioni, testo, fluidità dello schermo) e Aggiornamenti uguali; sfondo chiaro uguale."
 }
