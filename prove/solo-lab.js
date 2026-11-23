@@ -51,7 +51,7 @@ async function primoAvvio(b, url, app, risposta) {
 
   console.log('▶ Cosa va al tablet');
   const dati = JSON.parse(fs.readFileSync(path.join(__dirname, 'risultati', 'dati-realistici.json'), 'utf8'));
-  const ctx = await b.newContext({ viewport: { width: 1200, height: 900 } });
+  const ctx = await b.newContext({ locale: 'it-IT', viewport: { width: 1200, height: 900 } });
   await ctx.addInitScript(d => { if (sessionStorage.getItem('__f')) return; sessionStorage.setItem('__f', '1'); localStorage.clear(); for (const k in d) localStorage.setItem(k, typeof d[k] === 'string' ? d[k] : JSON.stringify(d[k])); localStorage.setItem('doctorwood_modalita', 'titolare'); localStorage.setItem('doctorwood_blocco_titolare', 'no'); localStorage.setItem('doctorwood_docs_chiesto', 'si'); localStorage.setItem('doctorwood_animazioni', 'no'); }, dati);
   const p = await ctx.newPage(); await p.goto('http://127.0.0.1:8766/sorgente-DoctorWood.html'); await p.waitForTimeout(1500);
   // tutti i lavori «mandati al laboratorio»: è il caso con più dati possibili sul tablet

@@ -17,6 +17,8 @@ const COMBO = {
   'android-laboratorio-telefono': { url: 'http://localhost:8765/index.html', dev: 'Pixel 7', tema: 'dark', modo: 'laboratorio', dati: 'realistici', android: true },
 };
 const nome = process.argv[2], C = COMBO[nome];
+if (C && process.env.URL_WEB) C.url = C.url.replace('http://localhost:8766', process.env.URL_WEB);
+if (C && process.env.URL_APP) C.url = C.url.replace('http://localhost:8765', process.env.URL_APP);
 // combinazioni «leggere»: tutti i tasti di primo livello, conferme accettate (le complete sono le tre principali)
 const LEGGERO = !['web-titolare-telefono-scuro', 'android-titolare-telefono', 'web-titolare-veleno'].includes(nome);
 if (!C) { console.log('Combinazioni:', Object.keys(COMBO).join(', ')); process.exit(1); }
@@ -57,12 +59,13 @@ function datiIniziali() {
 (async () => {
   const b = await chromium.launch();
   const opz = C.dev === 'pc' ? { viewport: { width: 1366, height: 860 } } : { ...devices[C.dev] };
-  const ctx = await b.newContext({ ...opz, colorScheme: C.tema, acceptDownloads: true });
+  const ctx = await b.newContext({ locale: 'it-IT', ...opz, colorScheme: C.tema, acceptDownloads: true });
   if (C.android) await ctx.addInitScript(MOCK_ANDROID);
   await ctx.addInitScript(() => {
     window.__pwn = new Set();
     new MutationObserver(() => document.querySelectorAll('[data-pwn]').forEach(e => window.__pwn.add((e.closest('[id]') || {}).id || '?'))).observe(document, { childList: true, subtree: true });
     window.print = () => {};   // la finestra di stampa del browser bloccherebbe la prova
+    window.__nonTradotti = new Set();   // INGLESE=1: i testi rimasti in italiano
   });
   let p = await ctx.newPage();
   const problemi = new Map();   // messaggio -> contesti
@@ -85,8 +88,12 @@ function datiIniziali() {
   };
   collega();
   const DATI = datiIniziali();
+  if (process.env.INGLESE) DATI.doctorwood_lingua = 'en';
+  const nonTradotti = new Map();   // testo -> dove
+  const raccogli = () => p.evaluate(() => [...(window.__nonTradotti || [])]).then(l => l.forEach(t => { if (!nonTradotti.has(t)) nonTradotti.set(t, dove); })).catch(() => {});
   await p.goto(C.url);
   const ripristina = async () => {
+    if (process.env.INGLESE) await raccogli();
     // la pagina risponde ancora? (un ciclo infinito la bloccherebbe)
     const viva = await Promise.race([p.evaluate(() => 1).catch(() => 0), new Promise(r => setTimeout(() => r(-1), 8000))]);
     if (viva !== 1) {
@@ -215,6 +222,7 @@ function datiIniziali() {
   const pwn = await p.evaluate(() => [...window.__pwn]);
   if (pwn.length) segna('INIEZIONE', 'elementi iniettati in ' + pwn.join(', '));
   const r = { combinazione: nome, tastiPremuti: premuti, dialoghi, secondi: Math.round((Date.now() - t0) / 1000), problemi: [...problemi].map(([k, v]) => ({ problema: k, dove: [...v].slice(0, 6), volte: v.size })) };
+  if (process.env.INGLESE) { await raccogli(); fs.writeFileSync(D + 'non-tradotti-' + nome + '.json', JSON.stringify([...nonTradotti], null, 1)); console.log(`testi senza traduzione: ${nonTradotti.size}`); }
   fs.writeFileSync(D + 'robot-' + nome + '.json', JSON.stringify(r, null, 1));
   console.log(`\n${nome}: ${premuti} tasti premuti, ${dialoghi} richieste di conferma, ${r.problemi.length} problemi diversi`);
   r.problemi.forEach(x => console.log(' - ' + x.problema + '  [' + x.volte + ' volte] es.: ' + x.dove.slice(0, 2).join(' | ')));

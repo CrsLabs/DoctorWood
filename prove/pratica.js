@@ -93,7 +93,7 @@ const MISURA = () => {
   const errori = [];
   for (const [schermo, opz] of SCHERMI) for (const [modo, url, contesti] of [
     ['titolare web', 'http://localhost:8766/sorgente-DoctorWood.html', TIT], ['titolare Android', 'http://localhost:8765/index.html', TIT], ['laboratorio Android', 'http://localhost:8765/index.html', LAB]]) {
-    const ctx = await b.newContext({ ...opz });
+    const ctx = await b.newContext({ locale: 'it-IT', ...opz });
     if (/Android/.test(modo)) await ctx.addInitScript(MOCK);
     const dati = { ...DATI, doctorwood_modalita: modo.startsWith('lab') ? 'laboratorio' : 'titolare', doctorwood_blocco_titolare: 'no', doctorwood_testo: String(TESTO) };
     await ctx.addInitScript(a => { if (!sessionStorage.getItem('__fatto')) { localStorage.clear(); for (const k in a) localStorage.setItem(k, a[k]); sessionStorage.setItem('__fatto', '1'); } }, dati);

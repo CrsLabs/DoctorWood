@@ -23,7 +23,7 @@ const DATI = {
 };
 (async () => {
   const b = await chromium.launch();
-  const ctx = await b.newContext({ viewport: { width: 412, height: 860 } });
+  const ctx = await b.newContext({ locale: 'it-IT', viewport: { width: 412, height: 860 } });
   await ctx.addInitScript(() => {
     window.__pwn = new Set();
     const guarda = () => document.querySelectorAll('[data-pwn]').forEach(e => window.__pwn.add(e.getAttribute('data-pwn') + ' in #' + (e.closest('[id]') || {}).id));

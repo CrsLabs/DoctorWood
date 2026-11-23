@@ -5,7 +5,7 @@
 <h1 align="center">DoctorWood</h1>
 <p align="center"><b>Workshop management for carpenters and joiners, even without internet.</b></p>
 
-<p align="center">Android 10+ · v1.1.1 · Also on PC · App in Italian · Free and open source (GPL-3.0)</p>
+<p align="center">Android 10+ · v1.1.1 · Also on PC · English and Italian · Free and open source (GPL-3.0)</p>
 
 ---
 
@@ -15,7 +15,7 @@
 2. Download the `DoctorWood-….apk` file and open it. The first time, Android asks you to allow installs from the browser or the Files app.
 3. Done. Later versions arrive by themselves: DoctorWood checks once a week for a new one (can be turned off in Settings → Updates) and Android always asks for confirmation. This also works on the workshop tablet.
 
-It installs over the previous version without losing data. It needs **Android 10 or later**. The app's interface is in **Italian**; the user guide and tutorials are also available in English.
+It installs over the previous version without losing data. It needs **Android 10 or later**.
 
 ## What it is
 
@@ -24,11 +24,11 @@ DoctorWood brings together a carpenter's everyday tools: from the **on‑site su
 The same code comes in two forms: a single-file **web page** to open on a computer, and an **Android app** with camera, fingerprint and sync between the owner's phone and the workshop tablet.
 
 <p align="center">
-  <img src="guida/img/01-home.png" alt="Home" width="190">
+  <img src="guida/img-en/01-home.png" alt="Home" width="190">
   &nbsp;
-  <img src="guida/img/03-taglio.png" alt="Panel cutting" width="190">
+  <img src="guida/img-en/03-taglio.png" alt="Panel cutting" width="190">
   &nbsp;
-  <img src="guida/img/10-scheda-lavoro.png" alt="Job card" width="190">
+  <img src="guida/img-en/10-scheda-lavoro.png" alt="Job card" width="190">
 </p>
 
 ## Features
@@ -48,11 +48,11 @@ The same code comes in two forms: a single-file **web page** to open on a comput
 - **Stock**: price list, stock levels, «To reorder», mark‑ups.
 
 <p align="center">
-  <img src="guida/img/05-preventivi.png" alt="Quotes" width="190">
+  <img src="guida/img-en/05-preventivi.png" alt="Quotes" width="190">
   &nbsp;
-  <img src="guida/img/14-confronto-schemi.png" alt="Layout comparison" width="190">
+  <img src="guida/img-en/14-confronto-schemi.png" alt="Layout comparison" width="190">
   &nbsp;
-  <img src="guida/img/13-laboratorio.png" alt="Workshop" width="190">
+  <img src="guida/img-en/13-laboratorio.png" alt="Workshop" width="190">
 </p>
 
 ### The workshop tablet
@@ -73,8 +73,8 @@ The same code comes in two forms: a single-file **web page** to open on a comput
 - **Encrypted backups only** (AES‑256‑GCM, PBKDF2‑SHA‑256 with 600,000 rounds) with password strength checks.
 - **«Erase everything from this device»** removes data, keys and permissions.
 
-### Appearance and help
-Theme automatic, light or dark (changes in one go, no flicker), animations, three text sizes, screen smoothness up to 120 Hz, adjustable vibration. **Report a problem or an idea** prepares an email to crslabs.info@gmail.com that you send yourself.
+### Languages, appearance and help
+**English and Italian** (Settings → Appearance → Language: the language changes at once; «Automatic» follows the phone; quotes and other PDFs come out in the chosen language). Theme automatic, light or dark (changes in one go, no flicker), animations, three text sizes, screen smoothness up to 120 Hz, adjustable vibration. **Report a problem or an idea** prepares an email to crslabs.info@gmail.com that you send yourself.
 
 ## Security and privacy
 - The page **cannot connect to the internet**: CSP rule `connect-src 'none'`, only scripts with a sha256 hash, no external libraries.
@@ -99,10 +99,11 @@ prepara.py                CSP hashes and www/index.html for the app
 android/                  Android project (Capacitor 8) + PairWood SDK in android/pairwood-sdk
 icona/, genera-icone.js   symbol, icons and splash screen
 prove/                    automated tests (Playwright)
+lingua/                   English translation (lingua/inglese.txt) and the script that puts it into the page
 guida/                    user guide and tutorials in PDF, screenshots
 rilasci/                  how to publish a version, and the file used by the updater
 ```
-The code and its comments are in Italian; folder names too (`guida` = guide, `prove` = tests, `rilasci` = releases, `icona` = icon).
+The code and its comments are in Italian; folder names too (`guida` = guide, `prove` = tests, `lingua` = language, `rilasci` = releases, `icona` = icon).
 
 ## Build
 ```
@@ -119,10 +120,10 @@ DoctorWood is free, with no ads and no data collection. If you find it useful yo
 
 ## Contact
 
-Problems, ideas, questions: **crslabs.info@gmail.com** (English is fine), or «Segnala un problema o un'idea» inside the app.
+Problems, ideas, questions: **crslabs.info@gmail.com** (English is fine), or «Report a problem or an idea» inside the app.
 
 ## Licence
 
 © 2026 CrsLabs. DoctorWood is free software: you can use, study, modify and redistribute it under the terms of the **GNU General Public License version 3 or later** (full text in [`LICENSE`](LICENSE)). It is distributed in the hope that it will be useful, but **without any warranty**.
 
-Third-party components: [Capacitor](https://capacitorjs.com) (MIT licence), Font Awesome Free icons (CC BY 4.0) partly redrawn, and the others listed in «Informazioni e licenze» inside the app. The PairWood sync engine belongs to CrsLabs and is included here precompiled in `android/pairwood-sdk`.
+Third-party components: [Capacitor](https://capacitorjs.com) (MIT licence), Font Awesome Free icons (CC BY 4.0) partly redrawn, and the others listed in «Information and licences» inside the app. The PairWood sync engine belongs to CrsLabs and is included here precompiled in `android/pairwood-sdk`.

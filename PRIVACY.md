@@ -22,7 +22,7 @@ DoctorWood is built to **collect no data**. It has no accounts, no ads, no analy
 - **Install apps**: to install updates (Android always asks for confirmation).
 
 ## Deleting your data
-Settings → Data and backup → «Cancella tutto da questo dispositivo» (erase everything from this device), or uninstall the app.
+Settings → Data and backup → «Erase everything from this device», or uninstall the app.
 
 ## Contact
 CrsLabs · crslabs.info@gmail.com

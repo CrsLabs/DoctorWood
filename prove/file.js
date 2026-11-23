@@ -16,7 +16,7 @@ const MOCK = `(() => { window.__nativo = []; window.Capacitor = { isNativePlatfo
   const esito = (n, c, i = '') => { c ? ok++ : ko++; console.log((c ? '  ✓ ' : '  ✗ ') + n + (i ? ' — ' + i : '')); };
   for (const android of [false, true]) {
     console.log(android ? '\n== App Android (ponte simulato)' : '== Pagina web');
-    const ctx = await b.newContext({ ...devices['Pixel 7'], acceptDownloads: true });
+    const ctx = await b.newContext({ locale: 'it-IT', ...devices['Pixel 7'], acceptDownloads: true });
     if (android) await ctx.addInitScript(MOCK);
     const p = await ctx.newPage();
     const errori = []; p.on('pageerror', e => errori.push(e.message)); p.on('console', m => { if (m.type() === 'error') errori.push(m.text().slice(0, 150)); });

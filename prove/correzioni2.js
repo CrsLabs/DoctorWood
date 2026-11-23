@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 (async () => {
-  const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 390, height: 800 } });
+  const b = await chromium.launch(); const ctx = await b.newContext({ locale: 'it-IT', viewport: { width: 390, height: 800 } });
   await ctx.addInitScript(() => { localStorage.setItem('doctorwood_modalita', 'titolare'); localStorage.setItem('doctorwood_animazioni', 'no'); });
   const p = await ctx.newPage(); const err = []; p.on('pageerror', e => err.push(e.message));
   let ok = 0, ko = 0; const t = (n, c) => { (c ? ok++ : ko++); console.log((c ? '  ✓ ' : '  ✗ ') + n); };

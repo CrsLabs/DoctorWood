@@ -17,7 +17,7 @@ const MOCK = () => {
   let ok = 0, ko = 0;
   const esito = (n, c, info = '') => { if (c) ok++; else ko++; console.log((c ? '  ✓ ' : '  ✗ ') + n + (info ? ' — ' + info : '')); };
   const apri = async dati => {
-    const ctx = await b.newContext({ ...devices['Pixel 7'] });
+    const ctx = await b.newContext({ locale: 'it-IT', ...devices['Pixel 7'] });
     await ctx.addInitScript(MOCK);
     await ctx.addInitScript(d => { if (!sessionStorage.getItem('__fatto')) { for (const k in d) localStorage.setItem(k, d[k]); sessionStorage.setItem('__fatto', '1'); } }, dati);
     const p = await ctx.newPage(); const errori = []; p.on('pageerror', e => errori.push(e.message));

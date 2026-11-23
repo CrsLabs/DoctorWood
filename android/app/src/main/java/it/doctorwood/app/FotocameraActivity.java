@@ -93,10 +93,13 @@ import java.util.concurrent.TimeUnit;
 public class FotocameraActivity extends AppCompatActivity implements SensorEventListener {
     static final String EXTRA_FOTO = "foto";
     static final String EXTRA_MASSIMO = "massimo";
+    static final String EXTRA_INGLESE = "inglese";
     static final int RISULTATO_SISTEMA = RESULT_FIRST_USER + 1;
 
     private static final int AMBRA = 0xFFF59E0B, BLU = 0xFF0F172A, BLU_CHIARO = 0xFF1E293B, VERDE = 0xFF34D399;
 
+    private boolean en;   // l'app è in inglese
+    private String t(String it, String inglese) { return en ? inglese : it; }
     private PreviewView anteprima;
     private ImageCapture scatto;
     private Camera camera;
@@ -148,6 +151,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
     protected void onCreate(Bundle stato) {
         super.onCreate(stato);
         massimo = Math.max(1, getIntent().getIntExtra(EXTRA_MASSIMO, 30));
+        en = getIntent().getBooleanExtra(EXTRA_INGLESE, false);
         lavoro = Executors.newSingleThreadExecutor();
         pref = getSharedPreferences("doctorwood_fotocamera", Context.MODE_PRIVATE);
         modoFlash = pref.getInt("flash", ImageCapture.FLASH_MODE_AUTO);
@@ -202,7 +206,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
         GradientDrawable sfumaAlto = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[] { 0xAA000000, 0x00000000 });
         alto.setBackground(sfumaAlto);
         alto.setPadding(dp(12), dp(8), dp(12), dp(24));
-        View chiudi = pulsanteIcona(R.drawable.ic_cam_chiudi, null, "Chiudi", v -> chiudi());
+        View chiudi = pulsanteIcona(R.drawable.ic_cam_chiudi, null, t("Chiudi", "Close"), v -> chiudi());
         alto.addView(chiudi, new FrameLayout.LayoutParams(-2, -2, Gravity.START | Gravity.CENTER_VERTICAL));
         LinearLayout destra = new LinearLayout(this);
         destra.setOrientation(LinearLayout.HORIZONTAL);
@@ -210,10 +214,10 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
         testoHdr = (TextView) bHdr.getChildAt(1);
         bHdr.setVisibility(View.GONE);   // compare solo se il telefono lo offre
         destra.addView(bHdr);
-        bFormato = pulsanteIcona(R.drawable.ic_cam_formato, formato, "Formato della foto", v -> cambiaFormato());
+        bFormato = pulsanteIcona(R.drawable.ic_cam_formato, formato, t("Formato della foto", "Photo format"), v -> cambiaFormato());
         testoFormato = (TextView) bFormato.getChildAt(1);
         destra.addView(bFormato);
-        LinearLayout bGriglia = pulsanteIcona(R.drawable.ic_cam_griglia, "Griglia", "Griglia", v -> {
+        LinearLayout bGriglia = pulsanteIcona(R.drawable.ic_cam_griglia, t("Griglia", "Grid"), t("Griglia", "Grid"), v -> {
             boolean si = !griglia.conLinee();
             griglia.linee(si);
             pref.edit().putBoolean("griglia", si).apply();
@@ -278,17 +282,17 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
         conta.setVisibility(View.GONE);
         boxMini.addView(conta, new FrameLayout.LayoutParams(-2, dp(22), Gravity.TOP | Gravity.END));
         boxMini.setPadding(0, dp(4), dp(4), 0);
-        boxMini.setContentDescription("Foto scattate");
+        boxMini.setContentDescription(t("Foto scattate", "Photos taken"));
         ruotabili.add(boxMini);
         comandi.addView(boxMini, new FrameLayout.LayoutParams(dp(68), dp(68), Gravity.START | Gravity.CENTER_VERTICAL));
 
         otturatore = new Otturatore(this);
-        otturatore.setContentDescription("Scatta");
+        otturatore.setContentDescription(t("Scatta", "Take photo"));
         otturatore.setOnClickListener(v -> scatta());
         comandi.addView(otturatore, new FrameLayout.LayoutParams(dp(82), dp(82), Gravity.CENTER));
 
         fatto = new TextView(this);
-        fatto.setText("Fatto");
+        fatto.setText(t("Fatto", "Done"));
         fatto.setTextColor(BLU);
         fatto.setTextSize(16);
         fatto.setTypeface(fatto.getTypeface(), android.graphics.Typeface.BOLD);
@@ -306,7 +310,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
         basso.addView(comandi, new LinearLayout.LayoutParams(-1, dp(88)));
 
         sistema = new TextView(this);
-        sistema.setText("Usa la fotocamera del telefono");
+        sistema.setText(t("Usa la fotocamera del telefono", "Use the phone's camera"));
         sistema.setTextColor(0xFFCBD5E1);
         sistema.setTextSize(13);
         sistema.setGravity(Gravity.CENTER);
@@ -366,7 +370,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
     private void mostraFlash() {
         if (iconaFlash == null) return;
         iconaFlash.setImageResource(modoFlash == ImageCapture.FLASH_MODE_OFF ? R.drawable.ic_cam_flash_no : R.drawable.ic_cam_flash);
-        testoFlash.setText(modoFlash == ImageCapture.FLASH_MODE_AUTO ? "Auto" : modoFlash == ImageCapture.FLASH_MODE_ON ? "Sì" : "No");
+        testoFlash.setText(modoFlash == ImageCapture.FLASH_MODE_AUTO ? "Auto" : modoFlash == ImageCapture.FLASH_MODE_ON ? t("Sì", "On") : t("No", "Off"));
     }
 
     private void costruisciZoom() {
@@ -381,7 +385,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
             t.setGravity(Gravity.CENTER);
             t.setTypeface(t.getTypeface(), android.graphics.Typeface.BOLD);
             t.setTag(o);
-            t.setContentDescription(l < 1f ? "Grandangolo" : l > 1.05f ? (o.ottico ? "Teleobiettivo" : "Zoom digitale") : "Obiettivo principale");
+            t.setContentDescription(l < 1f ? t("Grandangolo", "Wide angle") : l > 1.05f ? (o.ottico ? t("Teleobiettivo", "Telephoto") : t("Zoom digitale", "Digital zoom")) : t("Obiettivo principale", "Main lens"));
             t.setOnClickListener(v -> scegliObiettivo((Obiettivo) v.getTag()));
             t.setOnLongClickListener(v -> { mostraDiagnosi(); return true; });
             rigaZoom.addView(t, new LinearLayout.LayoutParams(dp(48), dp(36)));
@@ -410,7 +414,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
             try { lega(prima, prima != null && prima.diretto() ? 1f : zoomAttivo); } catch (Exception ignored) { }
             costruisciZoom();
             aggiornaHdr();
-            Toast.makeText(this, "Questo obiettivo non è disponibile per le app", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, t("Questo obiettivo non è disponibile per le app", "This lens isn't available to apps"), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -478,7 +482,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
         try { lega(r, r != null && r.diretto() ? 1f : (r != null ? r.rapporto : 1f)); attivo = r; zoomAttivo = r != null ? r.rapporto : 1f; } catch (Exception ignored) { }
         costruisciZoom();
         aggiornaHdr();
-        Toast.makeText(this, "Il telefono non lascia usare questo obiettivo alle app", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, t("Il telefono non lascia usare questo obiettivo alle app", "The phone doesn't let apps use this lens"), Toast.LENGTH_LONG).show();
     }
 
     private void chiudiNascosta() {
@@ -510,7 +514,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
         if (suPrincipale() && hdrEstensione) rilega();   // l'estensione si attiva solo ricollegando la fotocamera
         else applicaScenaHdr();
         aggiornaHdr();
-        Toast.makeText(this, hdrAcceso ? "HDR acceso" : "HDR spento", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, hdrAcceso ? t("HDR acceso", "HDR on") : t("HDR spento", "HDR off"), Toast.LENGTH_SHORT).show();
     }
 
     /** Senza estensione del produttore: chiede alla fotocamera la scena HDR (o la toglie). */
@@ -536,7 +540,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
         if (bHdr == null) return;
         boolean c = (suPrincipale() && hdrEstensione) || scenaHdr();
         bHdr.setVisibility(c ? View.VISIBLE : View.GONE);
-        testoHdr.setText(hdrAcceso ? "HDR sì" : "HDR no");
+        testoHdr.setText(hdrAcceso ? t("HDR sì", "HDR on") : t("HDR no", "HDR off"));
         bHdr.setAlpha(hdrAcceso ? 1f : 0.55f);
     }
 
@@ -556,13 +560,13 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
         ZoomState s = camera.getCameraInfo().getZoomState().getValue();
         if (s != null && suPrincipale()) z = s.getZoomRatio();
         try { lega(attivo, attivo != null && attivo.diretto() ? 1f : z); }
-        catch (Exception e) { Toast.makeText(this, "Fotocamera non disponibile", Toast.LENGTH_SHORT).show(); }
+        catch (Exception e) { Toast.makeText(this, t("Fotocamera non disponibile", "Camera not available"), Toast.LENGTH_SHORT).show(); }
     }
 
     /** Cosa offre il telefono alle app: utile per capire perché un obiettivo manca. Si può copiare. */
     private void mostraDiagnosi() {
         String testo = diagnosi.toString().trim();
-        if (testo.isEmpty()) testo = "Informazioni non ancora pronte.";
+        if (testo.isEmpty()) testo = t("Informazioni non ancora pronte.", "Information not ready yet.");
         final String copia = testo;
         TextView t = new TextView(this);
         t.setText(testo);
@@ -572,13 +576,13 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
         android.widget.ScrollView sv = new android.widget.ScrollView(this);
         sv.addView(t);
         new AlertDialog.Builder(this)
-                .setTitle("Obiettivi del telefono")
+                .setTitle(t("Obiettivi del telefono", "Phone lenses"))
                 .setView(sv)
-                .setPositiveButton("Chiudi", null)
-                .setNeutralButton("Copia", (d, w) -> {
+                .setPositiveButton(t("Chiudi", "Close"), null)
+                .setNeutralButton(t("Copia", "Copy"), (d, w) -> {
                     ClipboardManager cb = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                     if (cb != null) cb.setPrimaryClip(ClipData.newPlainText("Obiettivi", copia));
-                    Toast.makeText(this, "Copiato", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, t("Copiato", "Copied"), Toast.LENGTH_SHORT).show();
                 })
                 .show();
     }
@@ -668,7 +672,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
 
     /** Nessuna fotocamera utilizzabile qui: si passa a quella del telefono. */
     private void nonDisponibile() {
-        Toast.makeText(this, "Fotocamera non disponibile: apro quella del telefono", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, t("Fotocamera non disponibile: apro quella del telefono", "Camera not available: opening the phone's camera"), Toast.LENGTH_LONG).show();
         setResult(RISULTATO_SISTEMA);
         finish();
     }
@@ -855,7 +859,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
 
     private void scatta() {
         if ((scatto == null && nascosto == null) || inCorso) return;
-        if (foto.size() >= massimo) { Toast.makeText(this, "Al massimo " + massimo + " foto per volta", Toast.LENGTH_SHORT).show(); return; }
+        if (foto.size() >= massimo) { Toast.makeText(this, t("Al massimo " + massimo + " foto per volta", "At most " + massimo + " photos at a time"), Toast.LENGTH_SHORT).show(); return; }
         inCorso = true;
         otturatore.setOccupato(true);
         otturatore.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
@@ -873,7 +877,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
                     : rotazioneSuperficie == Surface.ROTATION_180 ? 180 : 0;
             nascosto.scatta(gradi, grezza, new ObiettivoNascosto.Salvata() {
                 @Override public void ok(File f) { lavoro.execute(() -> elabora(grezza, pronta, quadrata)); }
-                @Override public void errore(String motivo) { FotocameraActivity.this.errore("Scatto non riuscito: " + motivo); }
+                @Override public void errore(String motivo) { FotocameraActivity.this.errore(t("Scatto non riuscito: ", "Photo not taken: ") + motivo); }
             });
             return;
         }
@@ -881,7 +885,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
         scatto.takePicture(new ImageCapture.OutputFileOptions.Builder(grezza).build(), lavoro, new ImageCapture.OnImageSavedCallback() {
             @Override public void onImageSaved(@NonNull ImageCapture.OutputFileResults r) { elabora(grezza, pronta, quadrata); }
             @Override public void onError(@NonNull ImageCaptureException e) {
-                runOnUiThread(() -> errore("Scatto non riuscito: " + e.getMessage()));
+                runOnUiThread(() -> errore(t("Scatto non riuscito: ", "Photo not taken: ") + e.getMessage()));
             }
         });
     }
@@ -895,7 +899,7 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
             android.graphics.Bitmap mini = FotoUtil.miniatura(pronta, dp(56));
             runOnUiThread(() -> aggiunta(pronta.getAbsolutePath(), mini));
         } catch (Exception e) {
-            runOnUiThread(() -> errore("Foto non salvata: " + e.getMessage()));
+            runOnUiThread(() -> errore(t("Foto non salvata: ", "Photo not saved: ") + e.getMessage()));
         }
     }
 
@@ -928,16 +932,16 @@ public class FotocameraActivity extends AppCompatActivity implements SensorEvent
     private void chiudi() {
         if (foto.isEmpty()) { setResult(RESULT_CANCELED); finish(); return; }
         new AlertDialog.Builder(this)
-                .setTitle(foto.size() == 1 ? "Hai scattato 1 foto" : "Hai scattato " + foto.size() + " foto")
-                .setMessage("Vuoi aggiungerle al rilievo o scartarle?")
-                .setPositiveButton("Aggiungi", (d, w) -> consegna())
-                .setNegativeButton("Scarta", (d, w) -> {
+                .setTitle(foto.size() == 1 ? t("Hai scattato 1 foto", "You took 1 photo") : t("Hai scattato " + foto.size() + " foto", "You took " + foto.size() + " photos"))
+                .setMessage(t("Vuoi aggiungerle al rilievo o scartarle?", "Add them to the survey or discard them?"))
+                .setPositiveButton(t("Aggiungi", "Add"), (d, w) -> consegna())
+                .setNegativeButton(t("Scarta", "Discard"), (d, w) -> {
                     for (String f : foto) //noinspection ResultOfMethodCallIgnored
                         new File(f).delete();
                     setResult(RESULT_CANCELED);
                     finish();
                 })
-                .setNeutralButton("Continua", null)
+                .setNeutralButton(t("Continua", "Continue"), null)
                 .show();
     }
 

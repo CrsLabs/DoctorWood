@@ -532,6 +532,7 @@ public class LaboratorioPlugin extends Plugin {
     private void apriFotocamera(PluginCall call) {
         Intent i = new Intent(getContext(), FotocameraActivity.class);
         i.putExtra(FotocameraActivity.EXTRA_MASSIMO, call.getInt("massimo", 30));
+        i.putExtra(FotocameraActivity.EXTRA_INGLESE, Boolean.TRUE.equals(call.getBoolean("inglese", false)));
         startActivityForResult(call, i, "fotoScattate");
     }
 

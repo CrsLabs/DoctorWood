@@ -269,7 +269,7 @@ public class CassafortePlugin extends Plugin {
             BiometricPrompt.PromptInfo info = new BiometricPrompt.PromptInfo.Builder()
                     .setTitle(titolo)
                     .setSubtitle(sottotitolo)
-                    .setNegativeButtonText("Annulla")
+                    .setNegativeButtonText(call.getString("negativo", "Annulla"))
                     .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
                     .setConfirmationRequired(false)
                     .build();

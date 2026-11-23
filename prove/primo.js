@@ -31,7 +31,7 @@ const MOCK = `
 })();`;
 (async () => {
   const b = await chromium.launch();
-  const ctx = await b.newContext({ ...devices['Pixel 7'] });
+  const ctx = await b.newContext({ locale: 'it-IT', ...devices['Pixel 7'] });
   await ctx.addInitScript(MOCK);
   const p = await ctx.newPage();
   const errori = []; p.on('pageerror', e => errori.push(e.message)); p.on('console', m => { if (m.type() === 'error' || /Content Security|Refused/.test(m.text())) errori.push(m.text()); });

@@ -10,7 +10,9 @@
       const CAP = window.Capacitor;
       if (!CAP || typeof CAP.isNativePlatform !== 'function' || !CAP.isNativePlatform()) return;
       document.documentElement.classList.add('app-android');
-      const nat = (metodo, opz) => CAP.nativePromise('Cassaforte', metodo, opz || {});
+      // i testi delle finestre di Android (impronta, sequenza) seguono la lingua dell'app
+      const trNat = o => { if (typeof L !== 'function') return o; const c = { negativo: 'Annulla', ...o }; ['titolo', 'sottotitolo', 'negativo', 'descrizione'].forEach(k => { if (typeof c[k] === 'string') c[k] = L(c[k]); }); return c; };
+      const nat = (metodo, opz) => CAP.nativePromise('Cassaforte', metodo, trNat(opz || {}));
       window.__apriLink = url => nat('apriLink', { url });
       document.documentElement.classList.add('con-sostieni');
 
@@ -811,7 +813,7 @@
         if (fotocameraAperta) return;
         fotocameraAperta = true;
         let r;
-        try { r = await lab('scattaFoto', { massimo: 30 }); }
+        try { r = await lab('scattaFoto', { massimo: 30, inglese: inglese() }); }
         catch (err) {
           avvisoGuardia(err && err.code === 'PERMESSO'
             ? 'Per scattare serve il permesso «Fotocamera»: concedilo nelle impostazioni di Android (App → DoctorWood → Autorizzazioni).'
@@ -1455,7 +1457,7 @@
       };
       async function attivaAscolto(o) {
         await avviaPW();
-        const st = await pw('ascoltoContinuo', { attivo: true, giorni: o.giorni, inizio: o.inizio, fine: o.fine, titolo: 'DoctorWood · laboratorio' });
+        const st = await pw('ascoltoContinuo', { attivo: true, giorni: o.giorni, inizio: o.inizio, fine: o.fine, titolo: typeof L === 'function' ? L('DoctorWood · laboratorio') : 'DoctorWood · laboratorio' });
         pw('chiediNotifiche').catch(() => {});
         if (retePW) retePW.ascolto = st;
         aggiornaStatoSinc();

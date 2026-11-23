@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 (async () => {
-  const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 390, height: 800 } });
+  const b = await chromium.launch(); const p = await b.newPage({ locale: 'it-IT', viewport: { width: 390, height: 800 } });
   const err = []; p.on('pageerror', e => err.push(e.message));
   await p.goto('http://127.0.0.1:8766/sorgente-DoctorWood.html'); await p.waitForTimeout(800);
   await p.evaluate(() => { apriStrumento('photoSurvey'); }); await p.waitForTimeout(1200);

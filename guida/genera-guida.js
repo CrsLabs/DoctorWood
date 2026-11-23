@@ -2,7 +2,7 @@
 // Uso (dalla cartella del progetto):
 //   node guida/genera-guida.js            tutti e quattro
 //   node guida/genera-guida.js guida it   (oppure: tutorial it, guida en, tutorial en)
-// Prima le schermate: node guida/schermate.js (in guida/img; l'app è solo in italiano, i PDF inglesi usano le stesse schermate).
+// Prima le schermate: node guida/schermate.js (in guida/img) e node guida/schermate.js en (app in inglese, in guida/img-en).
 // L'indice ha i numeri di pagina: un primo PDF serve a vedere in che pagina cade ogni capitolo (i segni «§§id§§»,
 // invisibili, si leggono con pdftotext), poi si rifà il PDF con i numeri giusti.
 const { chromium } = require('playwright');

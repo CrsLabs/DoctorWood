@@ -1,7 +1,7 @@
 // «Manda al laboratorio», lavorazione in calendario, preventivo in gruppi
 const { chromium } = require('playwright');
 (async () => {
-  const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 390, height: 800 } });
+  const b = await chromium.launch(); const ctx = await b.newContext({ locale: 'it-IT', viewport: { width: 390, height: 800 } });
   await ctx.addInitScript(() => { if (localStorage.getItem('x_seed')) return; localStorage.setItem('x_seed', '1');
     localStorage.setItem('doctorwood_modalita', 'titolare'); localStorage.setItem('doctorwood_animazioni', 'no');
     localStorage.setItem('doctorwood_clients', JSON.stringify([{ id: 'c1', name: 'Mario Rossi', address: 'Via Roma 1' }]));

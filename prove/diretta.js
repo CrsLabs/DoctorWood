@@ -121,7 +121,7 @@ async function pairwood(d, m, o) {
   const errori = [];
   async function apri(chiave, dev, archivio) {
     const d = disp[chiave];
-    const ctx = await b.newContext({ ...devices[dev] });
+    const ctx = await b.newContext({ locale: 'it-IT', ...devices[dev] });
     await ctx.addInitScript(MOCK);
     await ctx.addInitScript(a => { if (!sessionStorage.getItem('__fatto')) { localStorage.clear(); for (const k in a) localStorage.setItem(k, a[k]); sessionStorage.setItem('__fatto', '1'); } }, archivio);
     await ctx.exposeFunction('__pw', (m, o) => pairwood(d, m, o));

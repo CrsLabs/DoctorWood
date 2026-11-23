@@ -91,7 +91,7 @@ async function combinazione(b, modo, nTablet, primoTablet) {
   }
   async function apri(chiave, dev, modalita) {
     const d = disp[chiave] = { nome: chiave, avviato: false, file: {}, fidati: new Set(), accetta: null, pagina: null };
-    const ctx = await b.newContext({ ...devices[dev] });
+    const ctx = await b.newContext({ locale: 'it-IT', ...devices[dev] });
     await ctx.addInitScript(MOCK);
     await ctx.addInitScript(a => { if (!sessionStorage.getItem('__fatto')) { localStorage.clear(); for (const k in a) localStorage.setItem(k, a[k]); sessionStorage.setItem('__fatto', '1'); } },
       { doctorwood_modalita: modalita, doctorwood_blocco_titolare: 'no', doctorwood_docs_chiesto: 'si' });   // la proposta della cartella dei documenti ha la sua prova (file.js)

@@ -14,7 +14,7 @@ const MOCK = `(() => { window.__nativo = []; window.Capacitor = { isNativePlatfo
   const esito = (n, c, info = '') => { if (c) ok++; else ko++; console.log((c ? '  ✓ ' : '  ✗ ') + n + (info ? ' — ' + info : '')); };
   const errori = [];
   async function apri(url, opz, dati, android) {
-    const ctx = await b.newContext({ ...opz });
+    const ctx = await b.newContext({ locale: 'it-IT', ...opz });
     if (android) await ctx.addInitScript(MOCK);
     await ctx.addInitScript(a => { if (!sessionStorage.getItem('__f')) { localStorage.clear(); for (const k in a) localStorage.setItem(k, a[k]); sessionStorage.setItem('__f', '1'); } }, dati);
     const p = await ctx.newPage();
