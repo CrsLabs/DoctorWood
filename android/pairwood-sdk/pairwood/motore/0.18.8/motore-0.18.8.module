@@ -1,0 +1,82 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "pairwood",
+    "module": "motore",
+    "version": "0.18.8",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "motore-0.18.8.jar",
+          "url": "motore-0.18.8.jar",
+          "size": 380720,
+          "sha512": "a489199395ab3f0277a53504be4f3e0a113536e7703b95471a7d55be5e58034558605d4237d21137deedbe6c5d23e263f47ddc3e7c93bd96da1bb5b8972b56c6",
+          "sha256": "6a4e01e66f7380b97549bcb362d3a0a9497d3a9831980472bc7fa1992ff8b818",
+          "sha1": "41fe991533cfcc3c0925d366313f733a1e0114cf",
+          "md5": "4372ca36e102e6c23d89e93aa7973098"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "motore-0.18.8.jar",
+          "url": "motore-0.18.8.jar",
+          "size": 380720,
+          "sha512": "a489199395ab3f0277a53504be4f3e0a113536e7703b95471a7d55be5e58034558605d4237d21137deedbe6c5d23e263f47ddc3e7c93bd96da1bb5b8972b56c6",
+          "sha256": "6a4e01e66f7380b97549bcb362d3a0a9497d3a9831980472bc7fa1992ff8b818",
+          "sha1": "41fe991533cfcc3c0925d366313f733a1e0114cf",
+          "md5": "4372ca36e102e6c23d89e93aa7973098"
+        }
+      ]
+    }
+  ]
+}

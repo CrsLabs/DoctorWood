@@ -2404,3 +2404,4 @@ ottieni #* => you get #*
 # Colonna # => # Tall unit #
 # Cassettiera # => # Drawer unit #
 # Libreria # => # Bookcase #
+Le notifiche compaiono in basso e si chiudono strisciandole con il dito; Impostazioni più fluide. => Notifications appear at the bottom and close by swiping them; smoother Settings.

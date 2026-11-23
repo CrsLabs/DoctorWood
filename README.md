@@ -5,7 +5,7 @@
 <h1 align="center">DoctorWood</h1>
 <p align="center"><b>Workshop management for carpenters and joiners, even without internet.</b></p>
 
-<p align="center">Android 10+ · v1.1.1 · Also on PC · English and Italian · Free and open source (GPL-3.0)</p>
+<p align="center">Android 10+ · v1.2.1 · Also on PC · English and Italian · Free and open source (GPL-3.0)</p>
 
 ---
 

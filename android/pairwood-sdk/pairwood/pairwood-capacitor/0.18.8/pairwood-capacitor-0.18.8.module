@@ -1,0 +1,90 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "pairwood",
+    "module": "pairwood-capacitor",
+    "version": "0.18.8",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "pairwood",
+          "module": "pairwood",
+          "version": {
+            "requires": "0.18.8"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "pairwood-capacitor-0.18.8.aar",
+          "url": "pairwood-capacitor-0.18.8.aar",
+          "size": 40250,
+          "sha512": "03b8f4f0c355f5fd0b17baeeb6f3f8fcb7a152c27457893195b30a272ffca200571697e2e6e7dac891451fc13e69f209498c3e24402ef9cf5b43301a20caa384",
+          "sha256": "3031628589a51f5c9e6beecf167635cebf8cccd89ce13a05aa38796fe8993608",
+          "sha1": "529cb286787f0c69033d0411ace93e0882f4da6c",
+          "md5": "4500caf589d1d918ccb69fefda80ce68"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "pairwood",
+          "module": "pairwood",
+          "version": {
+            "requires": "0.18.8"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "pairwood-capacitor-0.18.8.aar",
+          "url": "pairwood-capacitor-0.18.8.aar",
+          "size": 40250,
+          "sha512": "03b8f4f0c355f5fd0b17baeeb6f3f8fcb7a152c27457893195b30a272ffca200571697e2e6e7dac891451fc13e69f209498c3e24402ef9cf5b43301a20caa384",
+          "sha256": "3031628589a51f5c9e6beecf167635cebf8cccd89ce13a05aa38796fe8993608",
+          "sha1": "529cb286787f0c69033d0411ace93e0882f4da6c",
+          "md5": "4500caf589d1d918ccb69fefda80ce68"
+        }
+      ]
+    }
+  ]
+}
