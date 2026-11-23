@@ -6,7 +6,7 @@ name: Publish the version
 on:
   push:
     branches: [rilasci]
-    paths: ['rilasci/aggiornamento.json']
+    paths: ['rilasci/aggiornamento.json', 'rilasci/release-notes.json']
   workflow_dispatch:
 
 permissions:
@@ -31,7 +31,9 @@ jobs:
           [ -f "rilasci/$APK" ] || { echo "Missing rilasci/$APK"; exit 1; }
           VERO=$(sha256sum "rilasci/$APK" | cut -d' ' -f1)
           [ "$VERO" = "$SHA" ] || { echo "Fingerprint mismatch: $VERO instead of $SHA"; exit 1; }
-          jq -r '.novita' "$J" > note.txt
+          # release notes in English, from release-notes.json (the Italian «novita» is only for the app)
+          jq -r --arg t "v$VERS" '.[$t] // empty' rilasci/release-notes.json > note.txt
+          [ -s note.txt ] || { echo "Missing English notes for v$VERS in rilasci/release-notes.json"; exit 1; }
           echo "vers=$VERS" >> "$GITHUB_OUTPUT"; echo "apk=$APK" >> "$GITHUB_OUTPUT"
 
       - name: Publish the Release
@@ -40,6 +42,18 @@ jobs:
         run: |
           set -e
           TAG="v${{ steps.v.outputs.vers }}"
-          if gh release view "$TAG" >/dev/null 2>&1; then echo "Release $TAG already exists: nothing to do."; exit 0; fi
+          if gh release view "$TAG" >/dev/null 2>&1; then echo "Release $TAG already exists."; exit 0; fi
           gh release create "$TAG" --target "$GITHUB_SHA" --title "DoctorWood ${{ steps.v.outputs.vers }}" --notes-file note.txt --latest \
             "rilasci/${{ steps.v.outputs.apk }}" "rilasci/aggiornamento.json"
+
+      - name: English notes on every published Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          for TAG in $(jq -r 'keys[]' rilasci/release-notes.json); do
+            echo "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$' || continue
+            gh release view "$TAG" >/dev/null 2>&1 || continue
+            jq -r --arg t "$TAG" '.[$t]' rilasci/release-notes.json > n.txt
+            gh release edit "$TAG" --notes-file n.txt
+          done
