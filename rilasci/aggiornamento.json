@@ -1,8 +1,8 @@
 {
  "pacchetto": "it.doctorwood.app",
- "versionCode": 48,
- "versione": "1.1.1",
- "apk": "DoctorWood-1.1.1.apk",
- "sha256": "415f21459eddea772dfb8a844e5cb70efafb1311fcb8c8be2f7ac093f94c484d",
- "novita": "Impostazioni come nelle altre app CrsLabs: Aspetto (tema, animazioni, testo, fluidità dello schermo) e Aggiornamenti uguali; sfondo chiaro uguale."
+ "versionCode": 49,
+ "versione": "1.2.0",
+ "apk": "DoctorWood-1.2.0.apk",
+ "sha256": "0026892b2565dae0897283d056fcd32e6828edc1fdb09ed92578176f7339e85b",
+ "novita": "DoctorWood parla anche inglese: Impostazioni → Aspetto → Lingua. Anche i PDF, la fotocamera e l'impronta seguono la lingua scelta."
 }
