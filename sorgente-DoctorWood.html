@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- App completamente offline: nessuna risorsa esterna. Questa regola impedisce qualsiasi connessione di rete. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-40lG605s3Ic4kDC7ikifclDrhXZwwdazDuPt8nwJwRg='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-+I45OthA8CQz3i8HQg9FIb12uO6KRgrQmUJdGLe32xA='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
   <!-- Il browser non deve proporre traduzioni online, controllo ortografico online ne' prefetch DNS -->
   <meta name="google" content="notranslate">
@@ -562,6 +562,25 @@ img,video{max-width:100%;height:auto}
     html[data-tema="chiaro"] .tend-voce[aria-selected="true"] { background: rgb(245 158 11 / 0.14); color: #9a4a08; }
     html[data-tema="chiaro"] .tend-voce .tend-conta { background: #f1f5f9; color: #475569; }
     html[data-tema="chiaro"] .tend-voce.tend-azione { color: #0f766e; border-top-color: #cbd5e1; }
+    /* calendario e orario nello stile dell'app (al posto di quelli di Android), come in DoctorCar */
+    .data-nascosta { display: none !important; }
+    .cal-testa { display: flex; align-items: center; gap: 6px; }
+    .cal-testa .cal-mese { flex: 1; min-height: 44px; text-align: center; font-size: 16px; font-weight: 800; color: #f1f5f9; border-radius: 12px; }
+    .cal-freccia { width: 44px; height: 44px; border-radius: 12px; color: #cbd5e1; display: flex; align-items: center; justify-content: center; }
+    .cal-griglia { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-auto-rows: 44px; gap: 6px 4px; }
+    .cal-sett { align-self: center; text-align: center; font-size: 11px; font-weight: 700; color: #94a3b8; }
+    .cal-g { display: flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 12px; font-size: 15px; color: #e2e8f0; border: 1px solid transparent; }
+    .cal-g:active, .cal-freccia:active { background: #334155; }
+    .cal-g.oggi { border-color: #475569; font-weight: 800; }
+    .cal-g[aria-pressed="true"] { background: #f59e0b; color: #0f172a; font-weight: 800; border-color: #f59e0b; }
+    .cal-anni { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; max-height: 40vh; overflow-y: auto; }
+    .cal-ore { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+    .cal-etichetta { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: .04em; }
+    html[data-tema="chiaro"] .cal-testa .cal-mese { color: #0f172a; }
+    html[data-tema="chiaro"] .cal-g, html[data-tema="chiaro"] .cal-freccia { color: #1e293b; }
+    html[data-tema="chiaro"] .cal-g:active, html[data-tema="chiaro"] .cal-freccia:active { background: #e2e8f0; }
+    html[data-tema="chiaro"] .cal-g.oggi { border-color: #94a3b8; }
+    html[data-tema="chiaro"] .cal-sett, html[data-tema="chiaro"] .cal-etichetta { color: #64748b; }
     html[data-tema="chiaro"] .tendina-btn.filtrata { color: #0f766e; }
     .sezione-toggle[aria-expanded="true"] .chev { transform: rotate(90deg); }
     @media (prefers-reduced-motion: reduce) { .sezione-toggle .chev { transition: none; } }
@@ -577,6 +596,7 @@ img,video{max-width:100%;height:auto}
     .fa-vibra{--fa:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill-rule=%22evenodd%22 d=%22M8.5 2h7A1.5 1.5 0 0 1 17 3.5v17a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 7 20.5v-17A1.5 1.5 0 0 1 8.5 2zM9 4v16h6V4zM3 8h2v8H3zM19 8h2v8h-2zM0 10h2v4H0zM22 10h2v4h-2z%22/%3E%3C/svg%3E")}
     .fa-ingranaggio{--fa:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill-rule=%22evenodd%22 d=%22M10.3 1.5h3.4l.6 2.9c.7.2 1.4.5 2 .9l2.5-1.6 2.4 2.4-1.6 2.5c.4.6.7 1.3.9 2l2.9.6v3.4l-2.9.6c-.2.7-.5 1.4-.9 2l1.6 2.5-2.4 2.4-2.5-1.6c-.6.4-1.3.7-2 .9l-.6 2.9h-3.4l-.6-2.9c-.7-.2-1.4-.5-2-.9l-2.5 1.6-2.4-2.4 1.6-2.5c-.4-.6-.7-1.3-.9-2l-2.9-.6v-3.4l2.9-.6c.2-.7.5-1.4.9-2L3.2 6.1l2.4-2.4 2.5 1.6c.6-.4 1.3-.7 2-.9zM12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6z%22/%3E%3C/svg%3E")}
     .fa-magazzino{--fa:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 640 512%22%3E%3Cpath d=%22M0 488V171.3c0-26.2 15.9-49.7 40.2-59.4L308.1 4.8c7.6-3.1 16.1-3.1 23.8 0L599.8 111.9c24.3 9.7 40.2 33.3 40.2 59.4V488c0 13.3-10.7 24-24 24h-48c-13.3 0-24-10.7-24-24V224c0-17.7-14.3-32-32-32H128c-17.7 0-32 14.3-32 32v264c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24zm488 24H152c-13.3 0-24-10.7-24-24v-56h384v56c0 13.3-10.7 24-24 24zM128 400v-64h384v64zm0-96v-80h384v80z%22/%3E%3C/svg%3E")}
+    .fa-orologio{--fa:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill-rule=%22evenodd%22 d=%22M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm-1 3h2v5.4l3.8 2.3-1 1.7-4.8-2.9V7z%22/%3E%3C/svg%3E")}
     .fa-agenda{--fa:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill-rule=%22evenodd%22 d=%22M7 1.5h2V4h6V1.5h2V4h2.5A1.5 1.5 0 0 1 21 5.5v15a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20.5v-15A1.5 1.5 0 0 1 4.5 4H7zM5 9v11h14V9zm2 2h3v3H7zm4.5 0h3v3h-3zm4.5 0h2v3h-2zm-9 4.5h3v3H7zm4.5 0h3v3h-3z%22/%3E%3C/svg%3E")}
     .fa-spunta{--fa:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z%22/%3E%3C/svg%3E")}
     .fa-sposta{--fa:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M12 1.5l4 4h-3v5.5h5.5v-3l4 4-4 4v-3H13v5.5h3l-4 4-4-4h3V13H5.5v3l-4-4 4-4v3H11V5.5H8z%22/%3E%3C/svg%3E")}
@@ -2317,6 +2337,20 @@ html[data-tema="chiaro"] .marchio{border-color:#1e293b}
   </div>
 
   <!-- tendina nello stile dell'app (al posto del menù di sistema): vedi «Tendine» nello script -->
+  <div id="modalCalendario" role="dialog" aria-modal="true" aria-labelledby="calTitolo" style="z-index:86" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-end sm:items-center justify-center sm:p-4 hidden">
+    <div class="bg-slate-800 border border-slate-700 rounded-t-2xl sm:rounded-xl max-w-md w-full p-4 space-y-3 overflow-y-auto" style="max-height:92%;padding-bottom:max(1rem, env(safe-area-inset-bottom))">
+      <div class="flex items-center gap-2">
+        <h3 id="calTitolo" class="flex-1 text-base font-bold text-white">Scegli la data</h3>
+        <button type="button" id="calChiudi" aria-label="Chiudi" class="text-slate-400 flex-shrink-0 flex items-center justify-center" style="width:44px;height:44px"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="calCorpo"></div>
+      <button type="button" id="calConferma" class="w-full font-bold rounded-xl bg-amber-600 text-slate-900 disabled:opacity-40" style="min-height:48px" disabled>Conferma</button>
+      <div class="grid grid-cols-2 gap-2">
+        <button type="button" id="calOggi" class="font-semibold rounded-xl bg-slate-700 text-slate-100" style="min-height:44px">Oggi</button>
+        <button type="button" id="calCancella" class="font-semibold rounded-xl border border-slate-600 text-slate-200" style="min-height:44px">Senza data</button>
+      </div>
+    </div>
+  </div>
   <div id="modalTendina" role="dialog" aria-modal="true" aria-labelledby="tendTitolo" style="z-index:85" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-end sm:items-center justify-center sm:p-4 hidden">
     <div class="bg-slate-800 border border-slate-700 rounded-t-2xl sm:rounded-xl max-w-md w-full p-4 space-y-2 overflow-y-auto" style="max-height:85%">
       <div class="flex items-center gap-2 pb-1">
@@ -3485,6 +3519,7 @@ SOFTWARE.</pre></details>
   "Acconto richiesto (%) — facoltativo": "Deposit requested (%) — optional",
   "Acconto richiesto (va sul preventivo)": "Deposit requested (goes on the quote)",
   "Adattatore Cordova di Capacitor": "Capacitor's Cordova adapter",
+  "Adesso": "Now",
   "Agenda": "Calendar",
   "Aggiorna": "Update",
   "Aggiorna lavori": "Update jobs",
@@ -4366,6 +4401,8 @@ SOFTWARE.</pre></details>
   "Materiali": "Materials",
   "Materiali #/#": "Materials #/#",
   "Mese": "Month",
+  "Mese dopo": "Next month",
+  "Mese prima": "Previous month",
   "Messi in calendario": "Put in the calendar",
   "Messi in calendario # giorni di lavorazione.": "# workshop days put in the calendar.",
   "Messo in calendario # giorno di lavorazione.": "# workshop day put in the calendar.",
@@ -4373,6 +4410,7 @@ SOFTWARE.</pre></details>
   "Metti in calendario": "Put in the calendar",
   "Miniatura non aggiornata": "Thumbnail not updated",
   "Miniature schede non disponibili": "Sheet thumbnails not available",
+  "Minuti": "Minutes",
   "Misura minima degli avanzi": "Minimum offcut size",
   "Misure": "Dimensions",
   "Misure in": "Units",
@@ -4947,9 +4985,11 @@ SOFTWARE.</pre></details>
   "Scegli il primo giorno e quanti giorni servono (da # a #).": "Choose the first day and how many days are needed (from # to #).",
   "Scegli il primo giorno e quanti giorni servono.": "Choose the first day and how many days are needed.",
   "Scegli l'aspetto e ruota se serve, poi salva.": "Choose the look and rotate if needed, then save.",
+  "Scegli l'ora": "Choose the time",
   "Scegli l'ora, oppure segna «@».": "Choose the time, or tick «@».",
   "Scegli la cartella": "Choose the folder",
   "Scegli la cartella del dispositivo che viene tenuta allineata con l'altro dispositivo.\n\n• Con Google Drive: prima, con un'app come Autosync o FolderSync, collega una cartella del telefono (per esempio «@») a una cartella di Drive, in sincronizzazione nei due sensi. Poi scegli qui quella cartella del telefono. Drive non si può scegliere direttamente: Android non lo permette.\n• Senza cloud: una cartella tenuta allineata da Syncthing.\n\nDoctorWood non si collega a internet: in quella cartella scrive solo file cifrati.": "Choose the device folder that is kept in step with the other device.\n\n• With Google Drive: first, with an app like Autosync or FolderSync, link a phone folder (for example «@») to a Drive folder, syncing both ways. Then choose that phone folder here. Drive can't be chosen directly: Android doesn't allow it.\n• Without a cloud: a folder kept in step by Syncthing.\n\nDoctorWood doesn't connect to the internet: it writes only encrypted files in that folder.",
+  "Scegli la data": "Choose the date",
   "Scegli prima un cliente in anagrafica": "First choose a customer from your list",
   "Scegli un PIN di #-# cifre: servirà per tornare alla modalità Titolare. Così chi usa il tablet non vede prezzi e incassi.": "Choose a #-# digit PIN: it will be needed to go back to Owner mode. So whoever uses the tablet doesn't see prices and payments.",
   "Scegli una cartella del telefono (o della scheda SD, o di Drive): ci metto in ordine tutti i documenti, le foto e i dati dei clienti.\n\nDentro creo da solo una sottocartella per ogni sezione (Taglio, Preventivi, Rilievi…) e dentro a ognuna una per formato (PDF, CSV, DXF, Foto…). I backup dei dati dei clienti vanno in «@» e sono cifrati con la tua password.\n\nDopo, quando salvi qualcosa, non ti chiedo più dove metterlo.": "Choose a folder on the phone (or SD card, or Drive): I'll keep all documents, photos and customer data there in order.\n\nInside I create a subfolder for each section (Cutting, Quotes, Surveys…) and inside each one a folder per format (PDF, CSV, DXF, Photos…). Customer data backups go into «@» and are encrypted with your password.\n\nAfterwards, when you save something, I won't ask where to put it again.",
@@ -5044,8 +5084,10 @@ SOFTWARE.</pre></details>
   "Sensore bloccato": "Sensor locked",
   "Senza": "None",
   "Senza PIN": "Without PIN",
+  "Senza data": "No date",
   "Senza il permesso di installare app, DoctorWood non può aggiornarsi da sola. Puoi riprovare quando vuoi.": "Without permission to install apps, DoctorWood can't update itself. You can try again whenever you like.",
   "Senza impronta: la sequenza": "Without fingerprint: the pattern",
+  "Senza ora": "No time",
   "Senza sottocategoria": "No subcategory",
   "Sequenza": "Pattern",
   "Sequenza dei tagli": "Cutting sequence",
@@ -6376,6 +6418,7 @@ SOFTWARE.</pre></details>
     function chiudiFinestraAperta() {
       const aperta = (id) => { const el = document.getElementById(id); return el && !el.classList.contains('hidden'); };
       if (chiudiMenuTema()) return true;
+      if (aperta('modalCalendario')) { chiudiCalendario(); return true; }
       if (aperta('modalDomanda')) { const f = document.getElementById('modalDomanda'); if (f.chiudiDomanda) f.chiudiDomanda(); return true; }
       if (aperta('modalSchemi')) { chiudiModale('modalSchemi'); return true; }
       if (aperta('modalNuovoHome')) { chiudiModale('modalNuovoHome'); return true; }
@@ -16100,6 +16143,110 @@ SOFTWARE.</pre></details>
       const f = document.getElementById('modalTendina');
       f.addEventListener('click', e => { if (e.target === f) chiudiTendina(); });
       document.getElementById('tendChiudi').addEventListener('click', chiudiTendina);
+    })();
+
+    // ===== Date e ore nello stile dell'app (come in DoctorCar) =====
+    // Ogni campo data (o ora) resta nascosto e tiene il suo valore (AAAA-MM-GG oppure HH:MM); al suo posto c'è un pulsante
+    // che apre dal basso un calendario: giorno, mese avanti e indietro, e toccando il mese si sceglie l'anno.
+    // Per l'ora: le ore e i minuti (a passi di 5). Il tocco evidenzia soltanto: si conferma con «Conferma».
+    function chiudiCalendario() { document.getElementById('modalCalendario').classList.add('hidden'); }
+    (function () {
+      const V = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+      const $c = id => document.getElementById(id);
+      const pad = n => String(n).padStart(2, '0');
+      const oggiISO = () => { const d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+      const dataOk = v => /^\d{4}-\d{2}-\d{2}$/.test(v || '') && !isNaN(new Date(v + 'T12:00:00'));
+      const oraOk = v => /^\d{2}:\d{2}$/.test(v || '');
+      const MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+      const GIORNI = ['dom', 'lun', 'mar', 'mer', 'gio', 'ven', 'sab'];
+      const MESI_BREVI = ['gen', 'feb', 'mar', 'apr', 'mag', 'giu', 'lug', 'ago', 'set', 'ott', 'nov', 'dic'];
+      const testoData = v => { const d = new Date(v + 'T12:00:00'); return GIORNI[d.getDay()] + ' ' + d.getDate() + ' ' + MESI_BREVI[d.getMonth()] + ' ' + d.getFullYear(); };   // breve: sta anche nei campi stretti
+      let corrente = null, scelta = '', vista = { a: 0, m: 0, anni: false };
+      const ePerOra = inp => inp.type === 'time';
+      const testoBtn = inp => {
+        const b = inp._dataBtn; if (!b) return;
+        const v = V.get.call(inp), ok = ePerOra(inp) ? oraOk(v) : dataOk(v), t = b.querySelector('.tendina-testo');
+        t.textContent = ok ? (ePerOra(inp) ? v : testoData(v)) : (ePerOra(inp) ? 'Scegli l\'ora' : 'Scegli la data');
+        t.style.opacity = ok ? '' : '.6';
+      };
+      const imposta = (inp, v) => { if (V.get.call(inp) === v) return; V.set.call(inp, v); testoBtn(inp); inp.dispatchEvent(new Event('input', { bubbles: true })); inp.dispatchEvent(new Event('change', { bubbles: true })); };
+      const titolo = inp => { const l = inp.closest('label'); return (l ? [...l.childNodes].filter(n => n.nodeType === 3).map(n => n.textContent).join(' ').replace(/\s+/g, ' ').trim() : '') || (ePerOra(inp) ? 'Ora' : 'Data'); };
+      const disegnaData = () => {
+        const inp = corrente, sel = scelta || V.get.call(inp), oggi = oggiISO(), el = $c('calCorpo');
+        const max = Number((inp.max || '2200').slice(0, 4)) || 2200, min = Number((inp.min || '1900').slice(0, 4)) || 1900;
+        if (vista.anni) {
+          const bt = []; for (let y = Math.min(max, vista.a + 40); y >= Math.max(min, vista.a - 40); y--) bt.push(`<button type="button" class="cal-g" data-anno="${y}" aria-pressed="${y === vista.a}">${y}</button>`);
+          el.innerHTML = `<div class="cal-anni">${bt.join('')}</div>`;
+          const x = el.querySelector('[aria-pressed="true"]'); if (x) x.scrollIntoView({ block: 'center' });
+          return;
+        }
+        const primo = new Date(vista.a, vista.m, 1), vuoti = (primo.getDay() + 6) % 7, giorni = new Date(vista.a, vista.m + 1, 0).getDate();
+        const sett = inglese() ? ['M', 'T', 'W', 'T', 'F', 'S', 'S'] : ['L', 'M', 'M', 'G', 'V', 'S', 'D'];
+        let h = `<div class="cal-testa"><button type="button" class="cal-freccia" data-cal="-1" aria-label="Mese prima"><i class="fa-solid fa-chevron-left"></i></button><button type="button" class="cal-mese" data-cal="anni">${MESI[vista.m]} ${vista.a}</button><button type="button" class="cal-freccia" data-cal="1" aria-label="Mese dopo"><i class="fa-solid fa-chevron-right"></i></button></div><div class="cal-griglia" data-no-tr>`;
+        h += sett.map(x => `<span class="cal-sett">${x}</span>`).join('') + '<span></span>'.repeat(vuoti);
+        for (let g = 1; g <= giorni; g++) { const iso = vista.a + '-' + pad(vista.m + 1) + '-' + pad(g); h += `<button type="button" class="cal-g${iso === oggi ? ' oggi' : ''}" data-giorno="${iso}" aria-pressed="${iso === sel}">${g}</button>`; }
+        h += '<span></span>'.repeat(42 - vuoti - giorni);   // sempre sei righe: cambiando mese nulla si sposta
+        el.innerHTML = h + '</div>';
+      };
+      const disegnaOra = () => {
+        const v = scelta || V.get.call(corrente) || '', [hh, mm] = oraOk(v) ? v.split(':') : ['', ''];
+        const passo = Math.max(1, Math.round((Number(corrente.step) || 300) / 60));
+        let h = '<p class="cal-etichetta">Ora</p><div class="cal-ore" data-no-tr>';
+        for (let o = 0; o < 24; o++) h += `<button type="button" class="cal-g" data-ora="${pad(o)}" aria-pressed="${pad(o) === hh}">${pad(o)}</button>`;
+        h += '</div><p class="cal-etichetta" style="margin-top:10px">Minuti</p><div class="cal-ore" data-no-tr>';
+        for (let m = 0; m < 60; m += passo) h += `<button type="button" class="cal-g" data-min="${pad(m)}" aria-pressed="${pad(m) === mm}">${pad(m)}</button>`;
+        $c('calCorpo').innerHTML = h + '</div>';
+      };
+      const disegna = () => (ePerOra(corrente) ? disegnaOra : disegnaData)();
+      const apri = inp => {
+        corrente = inp; scelta = '';
+        const v = V.get.call(inp);
+        if (!ePerOra(inp)) { const d = dataOk(v) ? new Date(v + 'T12:00:00') : new Date(); vista = { a: d.getFullYear(), m: d.getMonth(), anni: false }; }
+        $c('calTitolo').textContent = titolo(inp);
+        $c('calConferma').disabled = true;
+        $c('calOggi').textContent = ePerOra(inp) ? 'Adesso' : 'Oggi';
+        $c('calCancella').textContent = ePerOra(inp) ? 'Senza ora' : 'Senza data';
+        $c('calCancella').classList.toggle('hidden', inp.required);
+        disegna();
+        $c('modalCalendario').classList.remove('hidden');
+      };
+      $c('calCorpo').addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b || !corrente) return;
+        if (b.dataset.giorno) { scelta = b.dataset.giorno; $c('calConferma').disabled = false; disegna(); return; }
+        if (b.dataset.anno) { vista.a = Number(b.dataset.anno); vista.anni = false; disegna(); return; }
+        if (b.dataset.cal === 'anni') { vista.anni = !vista.anni; disegna(); return; }
+        if (b.dataset.cal) { vista.m += Number(b.dataset.cal); if (vista.m < 0) { vista.m = 11; vista.a--; } else if (vista.m > 11) { vista.m = 0; vista.a++; } disegna(); return; }
+        if (b.dataset.ora || b.dataset.min) {
+          const v = scelta || V.get.call(corrente), [hh, mm] = oraOk(v) ? v.split(':') : ['09', '00'];
+          scelta = (b.dataset.ora || hh) + ':' + (b.dataset.min || mm); $c('calConferma').disabled = false; disegna();
+        }
+      });
+      $c('calConferma').addEventListener('click', () => { if (corrente && scelta) imposta(corrente, scelta); chiudiCalendario(); });
+      $c('calOggi').addEventListener('click', () => {
+        if (corrente) { const d = new Date(); imposta(corrente, ePerOra(corrente) ? pad(d.getHours()) + ':' + pad(Math.floor(d.getMinutes() / 5) * 5) : oggiISO()); }
+        chiudiCalendario();
+      });
+      $c('calCancella').addEventListener('click', () => { if (corrente) imposta(corrente, ''); chiudiCalendario(); });
+      $c('calChiudi').addEventListener('click', chiudiCalendario);
+      $c('modalCalendario').addEventListener('click', e => { if (e.target === $c('modalCalendario')) chiudiCalendario(); });
+      const faiData = inp => {
+        if (inp._dataBtn) return;
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = [...inp.classList].filter(c => c !== 'data-nascosta').join(' ') + ' tendina-btn';
+        b.setAttribute('aria-haspopup', 'dialog'); b.setAttribute('aria-label', titolo(inp));
+        b.innerHTML = '<span class="tendina-testo"></span><i class="fa-solid ' + (ePerOra(inp) ? 'fa-orologio' : 'fa-agenda') + ' text-slate-400" style="font-size:14px"></i>';
+        b.addEventListener('click', e => { e.preventDefault(); if (!inp.disabled) apri(inp); });
+        inp._dataBtn = b; inp.classList.add('data-nascosta'); inp.tabIndex = -1; inp.after(b);
+        Object.defineProperty(inp, 'value', { configurable: true, get() { return V.get.call(this); }, set(v) { V.set.call(this, v); testoBtn(this); } });
+        inp.addEventListener('change', () => testoBtn(inp));
+        new MutationObserver(() => { b.disabled = inp.disabled; }).observe(inp, { attributes: true, attributeFilter: ['disabled'] });
+        b.disabled = inp.disabled;
+        testoBtn(inp);
+      };
+      const scansiona = r => { if (r.nodeType !== 1) return; if (r.matches && r.matches('input[type=date], input[type=time]')) faiData(r); else if (r.querySelectorAll) r.querySelectorAll('input[type=date], input[type=time]').forEach(faiData); };
+      scansiona(document.body);
+      new MutationObserver(rr => { for (const r of rr) r.addedNodes.forEach(scansiona); }).observe(document.body, { childList: true, subtree: true });
     })();
 
     // ======================================================================
