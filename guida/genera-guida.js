@@ -1,8 +1,8 @@
-// Crea i PDF di guida e tutorial di DoctorWood (in italiano).
+// Crea i PDF di guida e tutorial di DoctorWood, in italiano e in inglese.
 // Uso (dalla cartella del progetto):
-//   node guida/genera-guida.js            tutti e due
-//   node guida/genera-guida.js guida      (oppure: tutorial)
-// Prima le schermate: node guida/schermate.js (in guida/img, con il server 8766 sulla cartella DoctorWood).
+//   node guida/genera-guida.js            tutti e quattro
+//   node guida/genera-guida.js guida it   (oppure: tutorial it, guida en, tutorial en)
+// Prima le schermate: node guida/schermate.js (in guida/img; l'app è solo in italiano, i PDF inglesi usano le stesse schermate).
 // L'indice ha i numeri di pagina: un primo PDF serve a vedere in che pagina cade ogni capitolo (i segni «§§id§§»,
 // invisibili, si leggono con pdftotext), poi si rifà il PDF con i numeri giusti.
 const { chromium } = require('playwright');
@@ -14,6 +14,8 @@ const versione = (gradle.match(/versionName "([^"]+)"/) || [])[1] || '?';
 const DOC = {
   'guida-it': { file: 'guida.html', pdf: 'DoctorWood-Guida.pdf', piede: "Guida all'uso", pagina: 'pagina', di: 'di' },
   'tutorial-it': { file: 'tutorial.html', pdf: 'DoctorWood-Tutorial.pdf', piede: 'Tutorial', pagina: 'pagina', di: 'di' },
+  'guida-en': { file: 'guide-en.html', pdf: 'DoctorWood-Guide-EN.pdf', piede: 'User guide', pagina: 'page', di: 'of' },
+  'tutorial-en': { file: 'tutorial-en.html', pdf: 'DoctorWood-Tutorials-EN.pdf', piede: 'Tutorials', pagina: 'page', di: 'of' },
 };
 const MESI = { it: ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'],
   en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] };
@@ -49,8 +51,8 @@ async function crea(b, chiave) {
 }
 
 (async () => {
-  const modo = process.argv[2];
-  const quali = modo ? [`${modo === 'tutorial' ? 'tutorial' : 'guida'}-it`] : Object.keys(DOC);
+  const [modo, lingua] = process.argv.slice(2);
+  const quali = modo ? [`${modo === 'tutorial' ? 'tutorial' : 'guida'}-${lingua === 'en' ? 'en' : 'it'}`] : Object.keys(DOC);
   const b = await chromium.launch();
   for (const k of quali) await crea(b, k);
   await b.close();
