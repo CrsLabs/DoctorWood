@@ -1,7 +1,7 @@
-# Pubblica da sola la Release di DoctorWood quando sul ramo «rilasci» arrivano un APK firmato e il suo aggiornamento.json.
-# L'APK è firmato prima, fuori da GitHub: qui non c'è nessuna chiave. Prima di pubblicare si controlla che
-# l'impronta SHA-256 dell'APK sia quella scritta in aggiornamento.json.
-name: Pubblica la versione
+# Publishes the DoctorWood Release by itself when a signed APK and its aggiornamento.json arrive on the «rilasci» (releases) branch.
+# The APK is signed beforehand, outside GitHub: there is no key here. Before publishing it checks that
+# the APK's SHA-256 fingerprint matches the one written in aggiornamento.json.
+name: Publish the version
 
 on:
   push:
@@ -18,28 +18,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Legge e controlla la versione
+      - name: Read and check the version
         id: v
         run: |
           set -e
           J=rilasci/aggiornamento.json
           VERS=$(jq -r '.versione' "$J"); APK=$(jq -r '.apk' "$J"); SHA=$(jq -r '.sha256' "$J"); PAC=$(jq -r '.pacchetto' "$J")
-          echo "Versione $VERS, file $APK"
-          [ "$PAC" = "it.doctorwood.app" ] || { echo "Pacchetto sbagliato: $PAC"; exit 1; }
-          echo "$VERS" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' || { echo "Versione non valida"; exit 1; }
-          echo "$APK" | grep -Eq '^[A-Za-z0-9._-]+\.apk$' || { echo "Nome del file non valido"; exit 1; }
-          [ -f "rilasci/$APK" ] || { echo "Manca rilasci/$APK"; exit 1; }
+          echo "Version $VERS, file $APK"
+          [ "$PAC" = "it.doctorwood.app" ] || { echo "Wrong package: $PAC"; exit 1; }
+          echo "$VERS" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' || { echo "Invalid version"; exit 1; }
+          echo "$APK" | grep -Eq '^[A-Za-z0-9._-]+\.apk$' || { echo "Invalid file name"; exit 1; }
+          [ -f "rilasci/$APK" ] || { echo "Missing rilasci/$APK"; exit 1; }
           VERO=$(sha256sum "rilasci/$APK" | cut -d' ' -f1)
-          [ "$VERO" = "$SHA" ] || { echo "Impronta diversa: $VERO invece di $SHA"; exit 1; }
+          [ "$VERO" = "$SHA" ] || { echo "Fingerprint mismatch: $VERO instead of $SHA"; exit 1; }
           jq -r '.novita' "$J" > note.txt
           echo "vers=$VERS" >> "$GITHUB_OUTPUT"; echo "apk=$APK" >> "$GITHUB_OUTPUT"
 
-      - name: Pubblica la Release
+      - name: Publish the Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -e
           TAG="v${{ steps.v.outputs.vers }}"
-          if gh release view "$TAG" >/dev/null 2>&1; then echo "La Release $TAG c'è già: niente da fare."; exit 0; fi
+          if gh release view "$TAG" >/dev/null 2>&1; then echo "Release $TAG already exists: nothing to do."; exit 0; fi
           gh release create "$TAG" --target "$GITHUB_SHA" --title "DoctorWood ${{ steps.v.outputs.vers }}" --notes-file note.txt --latest \
             "rilasci/${{ steps.v.outputs.apk }}" "rilasci/aggiornamento.json"
