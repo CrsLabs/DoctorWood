@@ -1,11 +1,11 @@
-# MAI su GitHub: chiavi di firma e password (custodite a mano dal titolare)
+# NEVER on GitHub: signing keys and passwords (kept by hand by the owner)
 firma/
 *.jks
 *.keystore
 *.p12
 firma.properties
 local.properties
-# generati o scaricati (si ricreano: npm install, python3 prepara.py, npx cap sync, gradle)
+# generated or downloaded (recreated by: npm install, python3 prepara.py, npx cap sync, gradle)
 node_modules/
 www/
 consegna/
@@ -25,5 +25,3 @@ android/app/src/main/assets/capacitor.plugins.json
 .DS_Store
 __pycache__/
 
-# le versioni pubblicate (APK firmati da installare) stanno in rilasci/
-!rilasci/*.apk

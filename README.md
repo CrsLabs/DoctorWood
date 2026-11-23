@@ -3,126 +3,126 @@
 </p>
 
 <h1 align="center">DoctorWood</h1>
-<p align="center"><b>Il gestionale per la falegnameria, anche senza internet.</b></p>
+<p align="center"><b>Workshop management for carpenters and joiners, even without internet.</b></p>
 
-<p align="center">Android 10+ · v1.1.1 · Anche su PC · Gratis e open source (GPL-3.0)</p>
+<p align="center">Android 10+ · v1.1.1 · Also on PC · App in Italian · Free and open source (GPL-3.0)</p>
 
 ---
 
-## Installare
+## Install
 
-1. Apri la pagina **[Releases](../../releases/latest)** di questo repository dal telefono o dal tablet.
-2. Scarica il file `DoctorWood-….apk` e aprilo. La prima volta Android chiede di permettere l'installazione dal browser o dall'app File.
-3. Fatto. Le versioni successive arrivano da sole: DoctorWood controlla una volta a settimana se ce n'è una nuova (si può spegnere in Impostazioni → Aggiornamenti) e Android chiede sempre la conferma. Vale anche per il tablet del laboratorio.
+1. Open the **[Releases](../../releases/latest)** page of this repository on your phone or tablet.
+2. Download the `DoctorWood-….apk` file and open it. The first time, Android asks you to allow installs from the browser or the Files app.
+3. Done. Later versions arrive by themselves: DoctorWood checks once a week for a new one (can be turned off in Settings → Updates) and Android always asks for confirmation. This also works on the workshop tablet.
 
-Si installa sopra la versione precedente senza perdere i dati. Serve **Android 10 o più recente**.
+It installs over the previous version without losing data. It needs **Android 10 or later**. The app's interface is in **Italian**; the user guide and tutorials are also available in English.
 
-## Cos'è
+## What it is
 
-DoctorWood riunisce gli strumenti di tutti i giorni di un falegname: dal **rilievo in cantiere** al **taglio dei pannelli**, dal **preventivo** al **montaggio**. Funziona **offline**: i dati restano sul tuo dispositivo, senza account e senza cloud.
+DoctorWood brings together a carpenter's everyday tools: from the **on‑site survey** to **panel cutting**, from the **quote** to the **installation**. It works **offline**: your data stays on your device, with no account and no cloud.
 
-Esiste in due forme dello stesso codice: una **pagina web** in un solo file da aprire dal PC, e un'**app Android** con fotocamera, impronta e sincronizzazione fra il telefono del titolare e il tablet di bottega.
+The same code comes in two forms: a single-file **web page** to open on a computer, and an **Android app** with camera, fingerprint and sync between the owner's phone and the workshop tablet.
 
 <p align="center">
   <img src="guida/img/01-home.png" alt="Home" width="190">
   &nbsp;
-  <img src="guida/img/03-taglio.png" alt="Taglio pannelli" width="190">
+  <img src="guida/img/03-taglio.png" alt="Panel cutting" width="190">
   &nbsp;
-  <img src="guida/img/10-scheda-lavoro.png" alt="Scheda del lavoro" width="190">
+  <img src="guida/img/10-scheda-lavoro.png" alt="Job card" width="190">
 </p>
 
-## Funzioni
+## Features
 
-### Clienti e lavori
-- **Clienti** con telefono, email, indirizzo, P.IVA o codice fiscale.
-- **Lavori**: tutto di una commessa in un posto (rilievo, preventivo, taglio, materiali, appuntamenti, montaggio, pagamento, note), con il **prossimo passo** sempre in vista.
-- **Percorsi guidati** per il nuovo lavoro e il nuovo preventivo.
-- **Agenda** a settimana o a mese; i giorni di **lavorazione** si mettono in calendario tutti insieme dal lavoro.
+### Customers and jobs
+- **Customers** with phone, email, address, VAT number or tax code.
+- **Jobs**: everything about a commission in one place (survey, quote, cutting, materials, appointments, installation, payment, notes), with the **next step** always in view.
+- **Guided paths** for a new job and a new quote.
+- **Calendar** by week or month; **workshop days** are put in the calendar all at once from the job.
 
-### In cantiere
-- **Rilievi** con le **foto** e le quote disegnate sopra, scattate con una fotocamera dedicata (zoom, grandangolo, HDR, griglia, livella) e **PDF del rilievo**.
+### On site
+- **Surveys** with **photos** and dimensions drawn on them, taken with a dedicated camera (zoom, wide angle, HDR, grid, level), and a **survey PDF**.
 
-### Progettare e vendere
-- **Taglio pannelli**: ottimizza i pezzi sui pannelli, parte anche **da un modello** (base, pensile, colonna…), recupera gli avanzi e **confronta fino a quattro schemi** (pannelli, scarto, tagli). Distinta e **etichette** in PDF (con codice a barre e **QR**), tabella per la sezionatrice, **DXF**.
-- **Preventivi** in PDF con le voci dal taglio e dal magazzino, **foto del sopralluogo**, **firma del cliente** con il dito (valida solo se il preventivo non cambia dopo) e **«Per la fattura»** (un CSV per il commercialista).
-- **Magazzino**: listino, scorte, «Da riordinare», ricarichi.
+### Design and sell
+- **Panel cutting**: optimises the parts on the panels, can start **from a model** (base, wall unit, tall unit…), reuses offcuts and **compares up to four layouts** (panels, waste, cuts). Cutting list and **labels** in PDF (with barcode and **QR**), table for the panel saw, **DXF**.
+- **Quotes** in PDF with items from cutting and from stock, **survey photos**, **customer signature** with a finger (valid only if the quote doesn't change afterwards) and **«For the invoice»** (a CSV for the accountant).
+- **Stock**: price list, stock levels, «To reorder», mark‑ups.
 
 <p align="center">
-  <img src="guida/img/05-preventivi.png" alt="Preventivi" width="190">
+  <img src="guida/img/05-preventivi.png" alt="Quotes" width="190">
   &nbsp;
-  <img src="guida/img/14-confronto-schemi.png" alt="Confronto degli schemi" width="190">
+  <img src="guida/img/14-confronto-schemi.png" alt="Layout comparison" width="190">
   &nbsp;
-  <img src="guida/img/13-laboratorio.png" alt="Laboratorio" width="190">
+  <img src="guida/img/13-laboratorio.png" alt="Workshop" width="190">
 </p>
 
-### Il tablet di bottega
-- **Modalità Laboratorio**: schermo intero, scritte grandi, app fissata sullo schermo; solo i lavori da produrre, i pezzi da tagliare, i materiali e le schede di montaggio. **Niente prezzi.**
-- **Tablet «solo laboratorio»**: scelto al primo avvio, resta per sempre in Laboratorio, senza PIN. Sul tablet arrivano solo titolo del lavoro, nome del cliente, indirizzo e data del montaggio, pezzi e materiali: mai prezzi, telefoni, email o partite IVA (una prova automatica lo controlla).
-- **Spunte** dei pezzi tagliati e dei materiali presi, che tornano al titolare; **«Leggi etichetta»** con il QR.
-- **Schede di montaggio** con foto e PDF.
+### The workshop tablet
+- **Workshop mode**: full screen, large text, app pinned to the screen; only the jobs to make, the parts to cut, the materials and the assembly sheets. **No prices.**
+- **«Workshop only» tablet**: chosen on first start, it stays in Workshop mode for good, with no PIN. Only the job title, customer name, installation address and date, parts and materials reach the tablet: never prices, phone numbers, emails or VAT numbers (an automated test checks this).
+- **Ticks** for cut parts and taken materials, sent back to the owner; **«Read label»** with the QR.
+- **Assembly sheets** with photos and PDFs.
 
-### Telefono del titolare e tablet, sempre allineati
-- **Sincronizzazione diretta nella stessa Wi‑Fi** con PairWood: i lavori passano dal telefono al tablet senza internet e senza server, in TLS 1.3.
-- **Abbinamento con QR**; «Dispositivi abbinati», «Dimentica», «Cambia codice» per un tablet perso.
-- I lavori sono **firmati dal titolare**: il tablet scarta tutto ciò che non è firmato da quella chiave.
-- In alternativa, sincronizzazione **tramite una cartella** gestita da un'app esterna (Syncthing, Drive…): solo file cifrati.
+### Owner's phone and tablet, always in step
+- **Direct sync on the same Wi‑Fi** with PairWood: jobs go from the phone to the tablet with no internet and no server, over TLS 1.3.
+- **QR pairing**; «Paired devices», «Forget», «Change code» for a lost tablet.
+- Jobs are **signed by the owner**: the tablet discards anything not signed by that key.
+- Alternatively, sync **through a folder** managed by another app (Syncthing, Drive…): encrypted files only.
 
-### Sicurezza
-- **Cassaforte**: su un dispositivo usato da Titolare, passando in Laboratorio i dati si cifrano con una chiave protetta dall'impronta e, per emergenza, da una password.
-- **Blocco con impronta o PIN** all'apertura e al ritorno nell'app; niente contenuto nelle app recenti.
-- **Backup solo cifrati** (AES‑256‑GCM, PBKDF2‑SHA‑256 a 600.000 giri) con controllo della robustezza della password.
-- **«Cancella tutto da questo dispositivo»** elimina dati, chiavi e permessi.
+### Security
+- **Vault**: on a device used as Owner, switching to Workshop encrypts the data with a fingerprint‑protected key and, for emergencies, a password.
+- **Fingerprint or PIN lock** on opening and when you return to the app; no content in recent apps.
+- **Encrypted backups only** (AES‑256‑GCM, PBKDF2‑SHA‑256 with 600,000 rounds) with password strength checks.
+- **«Erase everything from this device»** removes data, keys and permissions.
 
-### Aspetto e aiuto
-Tema automatico, chiaro o scuro (cambia in un colpo, senza sfarfallio), tre dimensioni del testo, animazioni e vibrazione regolabili, fluidità dello schermo fino a 120 Hz. **Segnala un problema o un'idea** prepara una mail a crslabs.info@gmail.com che spedisci tu.
+### Appearance and help
+Theme automatic, light or dark (changes in one go, no flicker), animations, three text sizes, screen smoothness up to 120 Hz, adjustable vibration. **Report a problem or an idea** prepares an email to crslabs.info@gmail.com that you send yourself.
 
-## Sicurezza e privacy
-- La pagina **non può collegarsi a internet**: regola CSP `connect-src 'none'`, solo script con impronta sha256, nessuna libreria esterna.
-- La rete la usano solo il codice nativo di PairWood (verso i dispositivi abbinati) e il controllo degli aggiornamenti (una lettura da GitHub a settimana, si può spegnere). Nessun dato tuo esce dal dispositivo. Dettagli in [`PRIVACY.md`](PRIVACY.md).
-- Gli aggiornamenti si installano solo se l'APK ha la stessa firma dell'app e la stessa impronta SHA-256 pubblicata.
-- Ogni dato in entrata (backup, sincronizzazione, file) viene ripulito campo per campo; ogni dato mostrato passa da `esc()`.
+## Security and privacy
+- The page **cannot connect to the internet**: CSP rule `connect-src 'none'`, only scripts with a sha256 hash, no external libraries.
+- The network is used only by PairWood's native code (towards paired devices) and by the update check (one read from GitHub a week, can be turned off). None of your data leaves the device. Details in [`PRIVACY.md`](PRIVACY.md).
+- Updates install only if the APK has the same signature as the app and the same published SHA‑256 fingerprint.
+- All incoming data (backup, sync, files) is cleaned field by field; all displayed data goes through `esc()`.
 
-## Documentazione
-| Cosa | Dove |
+## Documentation
+| What | Where |
 |---|---|
-| Guida all'uso con immagini (PDF) | [`guida/DoctorWood-Guida.pdf`](guida/DoctorWood-Guida.pdf) |
-| Tutorial «come si fa» per ogni funzione (PDF) | [`guida/DoctorWood-Tutorial.pdf`](guida/DoctorWood-Tutorial.pdf) |
-| Prove automatiche | [`prove/LEGGIMI-PROVE.md`](prove/LEGGIMI-PROVE.md) |
-| Istruzioni per chi sviluppa | [`SVILUPPO.md`](SVILUPPO.md) |
-| Informativa sulla privacy | [`PRIVACY.md`](PRIVACY.md) |
+| User guide with screenshots (PDF) | [`guida/DoctorWood-Guide-EN.pdf`](guida/DoctorWood-Guide-EN.pdf) · Italian: [`guida/DoctorWood-Guida.pdf`](guida/DoctorWood-Guida.pdf) |
+| «How to» tutorials (PDF) | [`guida/DoctorWood-Tutorials-EN.pdf`](guida/DoctorWood-Tutorials-EN.pdf) · Italian: [`guida/DoctorWood-Tutorial.pdf`](guida/DoctorWood-Tutorial.pdf) |
+| Automated tests | [`prove/README.md`](prove/README.md) |
+| Developer notes | [`DEVELOPMENT.md`](DEVELOPMENT.md) |
+| Privacy policy | [`PRIVACY.md`](PRIVACY.md) |
 
-Guida e tutorial sono divisi nelle stesse sei parti (Iniziare, Clienti e lavori, Progettare e vendere, In laboratorio, I tuoi dati, Impostazioni e aiuto), con l'indice e i numeri di pagina.
-
-## Struttura
+## Project layout
 ```
-sorgente-DoctorWood.html  la pagina (HTML, stile e script in un solo file)
-piattaforma-android.js    il livello Android (cassaforte, file, vibrazione, sincronizzazione, aggiornamenti)
-prepara.py                impronte CSP e www/index.html per l'app
-android/                  progetto Android (Capacitor 8) + SDK PairWood in android/pairwood-sdk
-icona/, genera-icone.js   simbolo, icone e schermata di avvio
-prove/                    prove automatiche (Playwright)
-guida/                    guida e tutorial in PDF, schermate
+sorgente-DoctorWood.html  the page (HTML, style and script in one file)
+piattaforma-android.js    the Android layer (vault, files, vibration, sync, updates)
+prepara.py                CSP hashes and www/index.html for the app
+android/                  Android project (Capacitor 8) + PairWood SDK in android/pairwood-sdk
+icona/, genera-icone.js   symbol, icons and splash screen
+prove/                    automated tests (Playwright)
+guida/                    user guide and tutorials in PDF, screenshots
+rilasci/                  how to publish a version, and the file used by the updater
 ```
+The code and its comments are in Italian; folder names too (`guida` = guide, `prove` = tests, `rilasci` = releases, `icona` = icon).
 
-## Compilare
+## Build
 ```
 npm install
 python3 prepara.py
 npx cap sync android
 cd android && ./gradlew assembleRelease
 ```
-Per l'APK firmato serve la chiave di firma, che **non** è in questo repository: senza, Gradle produce un APK non firmato da provare in proprio. Dettagli in [`SVILUPPO.md`](SVILUPPO.md).
+A signed APK needs the signing key, which is **not** in this repository: without it Gradle produces an unsigned APK for your own testing. Details in [`DEVELOPMENT.md`](DEVELOPMENT.md).
 
-## Sostieni DoctorWood
+## Support DoctorWood
 
-DoctorWood è gratis, senza pubblicità e senza raccogliere dati. Se ti è utile puoi offrire un caffè: **[ko-fi.com/crslabs](https://ko-fi.com/crslabs)**.
+DoctorWood is free, with no ads and no data collection. If you find it useful you can buy me a coffee: **[ko-fi.com/crslabs](https://ko-fi.com/crslabs)**.
 
-## Contatti
+## Contact
 
-Problemi, idee, domande: **crslabs.info@gmail.com**, oppure «Segnala un problema o un'idea» dentro l'app.
+Problems, ideas, questions: **crslabs.info@gmail.com** (English is fine), or «Segnala un problema o un'idea» inside the app.
 
-## Licenza
+## Licence
 
-© 2026 CrsLabs. DoctorWood è software libero: puoi usarlo, studiarlo, modificarlo e ridistribuirlo secondo i termini della **GNU General Public License versione 3 o successiva** (testo completo in [`LICENSE`](LICENSE)). È distribuito nella speranza che sia utile, ma **senza alcuna garanzia**.
+© 2026 CrsLabs. DoctorWood is free software: you can use, study, modify and redistribute it under the terms of the **GNU General Public License version 3 or later** (full text in [`LICENSE`](LICENSE)). It is distributed in the hope that it will be useful, but **without any warranty**.
 
-Componenti di terzi: [Capacitor](https://capacitorjs.com) (licenza MIT), icone Font Awesome Free (CC BY 4.0) in parte ridisegnate, e le altre elencate in «Informazioni e licenze» dentro l'app. Il motore di sincronizzazione PairWood è di CrsLabs e qui è incluso già compilato in `android/pairwood-sdk`.
+Third-party components: [Capacitor](https://capacitorjs.com) (MIT licence), Font Awesome Free icons (CC BY 4.0) partly redrawn, and the others listed in «Informazioni e licenze» inside the app. The PairWood sync engine belongs to CrsLabs and is included here precompiled in `android/pairwood-sdk`.
