@@ -1,8 +1,8 @@
 {
  "pacchetto": "it.doctorwood.app",
- "versionCode": 50,
- "versione": "1.2.1",
- "apk": "DoctorWood-1.2.1.apk",
- "sha256": "211dd6fd116456bae7739f5e70d322bfea7339a0833059849e7c10dc30516982",
- "novita": "Le notifiche compaiono in basso e si chiudono strisciandole con il dito; Impostazioni più fluide."
+ "versionCode": 51,
+ "versione": "1.2.2",
+ "apk": "DoctorWood-1.2.2.apk",
+ "sha256": "e1c5c2db3ad03ba6bbefa2b9d1bcc7b61c202327f5e1f47feb1deec2650373ad",
+ "novita": "Calendario e ora nello stile dell'app, come in DoctorCar."
 }

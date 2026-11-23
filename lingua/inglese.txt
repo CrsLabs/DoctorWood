@@ -2413,3 +2413,4 @@ Senza data => No date
 Senza ora => No time
 Mese prima => Previous month
 Mese dopo => Next month
+Calendario e ora nello stile dell'app, come in DoctorCar. => Date and time pickers in the app style, like DoctorCar.
