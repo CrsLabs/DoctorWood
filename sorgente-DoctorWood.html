@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- App completamente offline: nessuna risorsa esterna. Questa regola impedisce qualsiasi connessione di rete. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-qa7guAMZYPBazFPQ7q+PoiG+Kjp/7cF5D7WvOuDkDnM='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-xW79wzvOKy7tck1Yo3AhItooPi7+7SuBovij05jy3EY='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
   <!-- Il browser non deve proporre traduzioni online, controllo ortografico online ne' prefetch DNS -->
   <meta name="google" content="notranslate">
@@ -7650,17 +7650,14 @@ SOFTWARE.</pre></details>
       if (apri === aperto) return;
       if (corpo._anim) { corpo._anim.cancel(); corpo._anim = null; }
       if (apri) {
+        // si anima solo trasparenza e posizione (lo fa la scheda grafica): animare l'altezza costringeva a ridisegnare
+        // tutta la finestra a ogni fotogramma, e sui telefoni meno potenti l'apertura andava a scatti
         corpo.classList.remove('hidden');
-        const h = corpo.scrollHeight;
-        corpo.style.overflow = 'hidden';
-        const a = corpo._anim = corpo.animate([{ height: '0px', opacity: 0 }, { height: h + 'px', opacity: 1 }], { duration: 480, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)' });
-        a.onfinish = a.oncancel = () => { corpo.style.overflow = ''; if (corpo._anim === a) corpo._anim = null; };
+        const a = corpo._anim = corpo.animate([{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)' });
+        a.onfinish = a.oncancel = () => { if (corpo._anim === a) corpo._anim = null; };
       } else {
-        const h = corpo.scrollHeight;
-        corpo.style.overflow = 'hidden';
-        const a = corpo._anim = corpo.animate([{ height: h + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 420, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)', fill: 'forwards' });
-        a.onfinish = () => { corpo.classList.add('hidden'); corpo.style.overflow = ''; a.cancel(); if (corpo._anim === a) corpo._anim = null; };
-        a.oncancel = () => { corpo.style.overflow = ''; };
+        const a = corpo._anim = corpo.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: 140, easing: 'ease-in', fill: 'forwards' });
+        a.onfinish = () => { corpo.classList.add('hidden'); a.cancel(); if (corpo._anim === a) corpo._anim = null; };
       }
     }
     function apriCatImp(chiave) {
