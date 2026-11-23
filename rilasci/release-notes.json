@@ -1,4 +1,5 @@
 {
+ "v1.2.2": "Date and time pickers in the app style, like DoctorCar: they open from the bottom, you choose and confirm; tapping the month lets you pick the year.",
  "v1.2.1": "Notifications now appear at the bottom of the screen and close with a swipe; smoother Settings sections on less powerful phones.",
  "v1.2.0": "DoctorWood now speaks English: Settings → Appearance → Language. PDFs, the camera and the fingerprint prompts follow the chosen language too.",
  "v1.1.1": "Settings like the other CrsLabs apps: the same Appearance (theme, animations, text size, screen smoothness) and Updates sections; the same light background.",
