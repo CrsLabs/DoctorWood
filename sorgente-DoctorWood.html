@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- App completamente offline: nessuna risorsa esterna. Questa regola impedisce qualsiasi connessione di rete. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-34jQld7n0Ac1bQV7pSUYnwD0O+DSJ5l2/FpKO8wVBaI='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MjuilUelIkFpe57o0TOgyxWWHGICmgqxO3mtq91SWrg=' 'sha256-y5nFCSKL9a0hWCj9qvlU3YIjAZV1jarfdDUoPztrqk4='; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
   <!-- Il browser non deve proporre traduzioni online, controllo ortografico online ne' prefetch DNS -->
   <meta name="google" content="notranslate">
@@ -575,6 +575,19 @@ img,video{max-width:100%;height:auto}
     .cal-g[aria-pressed="true"] { background: #f59e0b; color: #0f172a; font-weight: 800; border-color: #f59e0b; }
     .cal-anni { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; max-height: 40vh; overflow-y: auto; }
     .cal-ore { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+    /* orario: due ruote (ore e minuti) con la riga scelta al centro, al posto di 36 tasti */
+    .cal-orario { display: grid; gap: 8px; }
+    .cal-lettura { text-align: center; font-size: 42px; font-weight: 800; line-height: 1.1; letter-spacing: .02em; font-variant-numeric: tabular-nums; color: #f8fafc; }
+    .cal-titoli, .cal-ruote { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .cal-titoli .cal-etichetta { text-align: center; }
+    .cal-ruote { position: relative; height: 240px; }
+    .cal-ruote::before { content: ""; position: absolute; left: 0; right: 0; top: 96px; height: 48px; border-radius: 12px; background: rgb(245 158 11 / .16); border: 1px solid rgb(245 158 11 / .6); pointer-events: none; }
+    .cal-ruota { position: relative; overflow-y: scroll; scroll-snap-type: y mandatory; padding: 96px 0; overscroll-behavior: contain; scrollbar-width: none; -webkit-mask-image: linear-gradient(transparent, #000 28%, #000 72%, transparent); mask-image: linear-gradient(transparent, #000 28%, #000 72%, transparent); }
+    .cal-ruota::-webkit-scrollbar { display: none; }
+    .cal-r { display: flex; align-items: center; justify-content: center; width: 100%; height: 48px; min-height: 48px; scroll-snap-align: center; font-size: 20px; color: #94a3b8; font-variant-numeric: tabular-nums; }
+    .cal-r[aria-pressed="true"] { color: #f8fafc; font-weight: 800; font-size: 24px; }
+    html[data-tema="chiaro"] .cal-lettura, html[data-tema="chiaro"] .cal-r[aria-pressed="true"] { color: #0f172a; }
+    html[data-tema="chiaro"] .cal-r { color: #64748b; }
     .cal-etichetta { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: .04em; }
     html[data-tema="chiaro"] .cal-testa .cal-mese { color: #0f172a; }
     html[data-tema="chiaro"] .cal-g, html[data-tema="chiaro"] .cal-freccia { color: #1e293b; }
@@ -7293,6 +7306,27 @@ SOFTWARE.</pre></details>
     // senza id e intoccabile che scende e svanisce; la finestra vera è già chiusa, quindi la logica non cambia
     const scorriFinestre = new WeakMap();
     document.addEventListener('scroll', e => { const t = e.target; if (t && t.nodeType === 1 && t.closest && t.closest('[id^=modal]')) scorriFinestre.set(t, t.scrollTop); }, true);
+    // ----- lavoro pesante dopo la chiusura -----
+    // Quando una finestra comincia a chiudersi, i ridisegni delle liste aspettano i primi fotogrammi dell'animazione (poi la finestra scende da sola): altrimenti la chiusura parte in ritardo e va a scatti.
+    const chiusura = { fino: 0, coda: new Map(), timer: 0 };
+    const chiusuraInCorso = () => performance.now() < chiusura.fino;
+    function svuotaChiusura() { clearTimeout(chiusura.timer); chiusura.fino = 0; const l = [...chiusura.coda.values()]; chiusura.coda.clear(); l.forEach(f => { try { f(); } catch (e) { console.error(e); } }); }
+    function iniziaChiusura() { if (document.documentElement.getAttribute('data-animazioni') === 'no') return; chiusura.fino = performance.now() + 140; clearTimeout(chiusura.timer); chiusura.timer = setTimeout(svuotaChiusura, 150); }
+    function rimandaDuranteChiusura(nomi) {
+      for (const n of nomi) {
+        const f = window[n]; if (typeof f !== 'function' || f.__rimandata) continue;
+        const w = function (...a) { if (chiusuraInCorso()) { chiusura.coda.set(n + JSON.stringify(a), () => f.apply(this, a)); return; } return f.apply(this, a); };
+        w.__rimandata = true; window[n] = w;
+      }
+    }
+    (function () {   // si accorge subito (non a lavoro finito) di una finestra che si nasconde
+      const desc = Object.getOwnPropertyDescriptor(Element.prototype, 'classList'); if (!desc || !desc.get) return;
+      const di = new WeakMap(), aggiungi = DOMTokenList.prototype.add;
+      Object.defineProperty(Element.prototype, 'classList', { configurable: true, enumerable: desc.enumerable, get() { const l = desc.get.call(this); if (!di.has(l)) di.set(l, this); return l; } });
+      DOMTokenList.prototype.add = function (...t) { if (t.includes('hidden')) { const el = di.get(this); if (el && el.id && el.id.startsWith('modal')) iniziaChiusura(); } return aggiungi.apply(this, t); };
+    })();
+    document.addEventListener('visibilitychange', () => { if (document.hidden) svuotaChiusura(); });
+    window.addEventListener('pagehide', svuotaChiusura);
     function animaUscita(m) {
       if (!animazioniAttive() || !m.animate || m.id === 'modalEditNote' || m.id === 'modalVisore' || m.id === 'modalRaddrizza' || m.id === 'modalModalita' || !m.isConnected) return;
       const pannello = m.firstElementChild; if (!pannello) return;
@@ -10445,7 +10479,7 @@ SOFTWARE.</pre></details>
     // ======================================================================
     // ===== SEGNALAZIONI ALLO SVILUPPATORE (senza internet) =====
     // ======================================================================
-    const VERSIONE_APP = '1.2.2';   // uguale a versionName in android/app/build.gradle
+    const VERSIONE_APP = '1.2.3';   // uguale a versionName in android/app/build.gradle
     // Dati dello sviluppatore per «Informazioni e licenze»: si mostrano solo le voci compilate
     const SVILUPPATORE = { nome: '', ditta: 'CrsLabs', email: 'crslabs.info@gmail.com', telefono: '', sito: '', indirizzo: '', partitaIva: '' };
     const TITOLARE_COPYRIGHT = 'CrsLabs';   // ← nome o ditta nella riga «© 2026 …» (vuoto: «DoctorWood»)
@@ -16190,14 +16224,43 @@ SOFTWARE.</pre></details>
         el.innerHTML = h + '</div>';
       };
       const disegnaOra = () => {
-        const v = scelta || V.get.call(corrente) || '', [hh, mm] = oraOk(v) ? v.split(':') : ['', ''];
+        const v = scelta || V.get.call(corrente) || '', [hh, mm] = oraOk(v) ? v.split(':') : ['09', '00'];
         const passo = Math.max(1, Math.round((Number(corrente.step) || 300) / 60));
-        let h = '<p class="cal-etichetta">Ora</p><div class="cal-ore" data-no-tr>';
-        for (let o = 0; o < 24; o++) h += `<button type="button" class="cal-g" data-ora="${pad(o)}" aria-pressed="${pad(o) === hh}">${pad(o)}</button>`;
-        h += '</div><p class="cal-etichetta" style="margin-top:10px">Minuti</p><div class="cal-ore" data-no-tr>';
-        for (let m = 0; m < 60; m += passo) h += `<button type="button" class="cal-g" data-min="${pad(m)}" aria-pressed="${pad(m) === mm}">${pad(m)}</button>`;
-        $c('calCorpo').innerHTML = h + '</div>';
+        const mmVicino = pad(Math.min(59, Math.round(Number(mm) / passo) * passo % 60));   // un'ora scritta altrove (10:32) si appoggia al minuto più vicino
+        let h = `<div class="cal-orario" data-no-tr><div class="cal-lettura" id="calLettura">${hh}:${mmVicino}</div><div class="cal-titoli"><p class="cal-etichetta">Ora</p><p class="cal-etichetta">Minuti</p></div><div class="cal-ruote"><div class="cal-ruota" id="calRuotaOre" role="listbox" aria-label="Ora">`;
+        for (let o = 0; o < 24; o++) h += `<button type="button" class="cal-r" data-ora="${pad(o)}" aria-pressed="${pad(o) === hh}">${pad(o)}</button>`;
+        h += '</div><div class="cal-ruota" id="calRuotaMin" role="listbox" aria-label="Minuti">';
+        for (let m = 0; m < 60; m += passo) h += `<button type="button" class="cal-r" data-min="${pad(m)}" aria-pressed="${pad(m) === mmVicino}">${pad(m)}</button>`;
+        $c('calCorpo').innerHTML = h + '</div></div></div>';
+        scelta = hh + ':' + mmVicino; $c('calConferma').disabled = false;   // quello che si legge in grande è già la scelta
       };
+      // le ruote si portano sul valore scelto (a finestra visibile) e, fermandosi, lo cambiano
+      const RIGA = 48;
+      const ruote = () => [$c('calRuotaOre'), $c('calRuotaMin')].filter(Boolean);
+      let ultimaPosa = 0;
+      const posaRuote = (morbido) => {
+        const [hh, mm] = (scelta || '09:00').split(':'); ultimaPosa = Date.now();
+        for (const [r, attr, val] of [[$c('calRuotaOre'), 'ora', hh], [$c('calRuotaMin'), 'min', mm]]) {
+          if (!r) continue; const el = r.querySelector(`[data-${attr}="${val}"]`); if (!el) continue;
+          const top = [...r.children].indexOf(el) * RIGA; if (morbido && r.scrollTo) r.scrollTo({ top, behavior: 'smooth' }); else r.scrollTop = top;
+        }
+      };
+      const aggiornaOraScelta = () => {
+        const [hh, mm] = scelta.split(':');
+        for (const b of $c('calCorpo').querySelectorAll('.cal-r')) b.setAttribute('aria-pressed', String(b.dataset.ora === hh || b.dataset.min === mm));
+        const l = $c('calLettura'); if (l) l.textContent = scelta;
+      };
+      const timerRuota = new Map();
+      $c('calCorpo').addEventListener('scroll', e => {
+        const r = e.target; if (!r.classList || !r.classList.contains('cal-ruota') || !corrente) return;
+        clearTimeout(timerRuota.get(r));
+        timerRuota.set(r, setTimeout(() => {
+          if (Date.now() - ultimaPosa < 120 || !$c('calRuotaOre')) return;
+          const k = Math.max(0, Math.min(r.children.length - 1, Math.round(r.scrollTop / RIGA))), val = r.children[k].dataset.ora || r.children[k].dataset.min;
+          const [hh, mm] = (scelta || '09:00').split(':'); const nuova = r.id === 'calRuotaOre' ? val + ':' + mm : hh + ':' + val;
+          if (nuova !== scelta) { scelta = nuova; aggiornaOraScelta(); }
+        }, 90));
+      }, true);
       const disegna = () => (ePerOra(corrente) ? disegnaOra : disegnaData)();
       const apri = inp => {
         corrente = inp; scelta = '';
@@ -16210,6 +16273,7 @@ SOFTWARE.</pre></details>
         $c('calCancella').classList.toggle('hidden', inp.required);
         disegna();
         $c('modalCalendario').classList.remove('hidden');
+        if (ePerOra(inp)) { posaRuote(false); requestAnimationFrame(() => posaRuote(false)); }
       };
       $c('calCorpo').addEventListener('click', e => {
         const b = e.target.closest('button'); if (!b || !corrente) return;
@@ -16219,7 +16283,7 @@ SOFTWARE.</pre></details>
         if (b.dataset.cal) { vista.m += Number(b.dataset.cal); if (vista.m < 0) { vista.m = 11; vista.a--; } else if (vista.m > 11) { vista.m = 0; vista.a++; } disegna(); return; }
         if (b.dataset.ora || b.dataset.min) {
           const v = scelta || V.get.call(corrente), [hh, mm] = oraOk(v) ? v.split(':') : ['09', '00'];
-          scelta = (b.dataset.ora || hh) + ':' + (b.dataset.min || mm); $c('calConferma').disabled = false; disegna();
+          scelta = (b.dataset.ora || hh) + ':' + (b.dataset.min || mm); $c('calConferma').disabled = false; aggiornaOraScelta(); posaRuote(true);
         }
       });
       $c('calConferma').addEventListener('click', () => { if (corrente && scelta) imposta(corrente, scelta); chiudiCalendario(); });
@@ -17858,6 +17922,7 @@ SOFTWARE.</pre></details>
     inizializzaRaddrizza();
     inizializzaVisore();
 
-  </script>
+      rimandaDuranteChiusura(["renderizzaAgenda", "renderizzaAvanziMagazzino", "renderizzaBarraRilievo", "renderizzaCategorie", "renderizzaClienti", "renderizzaDettaglioScheda", "renderizzaLavori", "renderizzaLavoriCliente", "renderizzaListaAnnotazioni", "renderizzaMagazzino", "renderizzaMiniature", "renderizzaPannelliMagazzino", "renderizzaPannelloAttivo", "renderizzaPreventiviSalvati", "renderizzaProgettiCliente", "renderizzaProgettiSalvati", "renderizzaSceltaArticoli", "renderizzaSchede", "renderizzaSottocategorie", "aggiornaVisteLavori"]);
+</script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 {
  "pacchetto": "it.doctorwood.app",
- "versionCode": 51,
- "versione": "1.2.2",
- "apk": "DoctorWood-1.2.2.apk",
- "sha256": "e1c5c2db3ad03ba6bbefa2b9d1bcc7b61c202327f5e1f47feb1deec2650373ad",
- "novita": "Calendario e ora nello stile dell'app, come in DoctorCar."
+ "versionCode": 52,
+ "versione": "1.2.3",
+ "apk": "DoctorWood-1.2.3.apk",
+ "sha256": "33905dc2109041d4151f6e26d9e14dd5551283791e689eb772c013d5ad923662",
+ "novita": "L'ora degli appuntamenti si sceglie con due ruote, più semplice; finestre che si chiudono senza scatti."
 }

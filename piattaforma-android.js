@@ -1148,7 +1148,7 @@
       let pwPronto = null, retePW = null;
       function avviaPW() {
         if (!pwPronto) {
-          pwPronto = pw('avvia', { cartelle: [CARTELLA_PW], nome: modoLab() ? 'Laboratorio' : 'Titolare', minutiPeriodico: 15 })
+          pwPronto = pw('avvia', { cartelle: [CARTELLA_PW], nome: modoLab() ? 'Laboratorio' : 'Titolare', minutiPeriodico: 15, porta: 47811 })   // una porta per app: DoctorWood 47811, BothWise 47812, DoctorCar 47813
             .then(st => { if (!avviaPW.ascolto) { avviaPW.ascolto = true; try { CAP.addListener('PairWood', 'evento', eventoPW); } catch (_) {} } return st; })
             .catch(e => { pwPronto = null; throw e; });
         }

@@ -37,6 +37,9 @@ let ok = 0, ko = 0; const t = (n, c, x = '') => { (c ? ok++ : ko++); console.log
     // l'ora
     await btnOra.click(); await p.waitForTimeout(200);
     t('per l\'ora: 24 ore e minuti a passi di 5', await p.locator('#calCorpo [data-ora]').count() === 24 && await p.locator('#calCorpo [data-min]').count() === 12);
+    t('l\'ora è in grande al centro e il tasto «Conferma» è già pronto', /^\d\d:\d\d$/.test(await p.locator('#calLettura').textContent()) && !(await p.locator('#calConferma').isDisabled()));
+    await p.evaluate(() => { document.getElementById('calRuotaOre').scrollTo({ top: 14 * 48 }); document.getElementById('calRuotaMin').scrollTo({ top: 9 * 48 }); }); await p.waitForTimeout(600);
+    t('scorrendo le due ruote l\'ora cambia (14:45)', (await p.locator('#calLettura').textContent()) === '14:45', await p.locator('#calLettura').textContent());
     await p.locator('#calCorpo [data-ora="10"]').click(); await p.locator('#calCorpo [data-min="30"]').click(); await p.locator('#calConferma').click(); await p.waitForTimeout(300);
     t('ora 10:30 nel campo e sul pulsante', await p.evaluate(() => document.getElementById('appOra').value) === '10:30' && /10:30/.test(await btnOra.textContent()));
     // il valore messo dal codice si vede sul pulsante
