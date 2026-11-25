@@ -38,11 +38,11 @@
         {
           "name": "motore-0.19.0.jar",
           "url": "motore-0.19.0.jar",
-          "size": 381797,
-          "sha512": "b988c95c12270d9532feb8d2c9f83f869057e08eb47cfd482d95399e91f95eb214c464ae3484a9c44788e04529801f67f7b5330d3e340166ba53f7d9c91cd2ac",
-          "sha256": "8d79fc73b90564cc56abddfa920677f0347a0aed4baea2203c1fe1e55e9980df",
-          "sha1": "df0069c0a055abfb4f4dbe1f315beabcdff16e6e",
-          "md5": "95ce5f1e0303706505f051d34e4d2cb9"
+          "size": 381873,
+          "sha512": "d914b96c111b5dcdde1cacb74b4bca518400ee10a104e465e284441f12309227711aa3b1352a070a6989e22e5202b8ca85344465af4b753bf99c35614dc49aff",
+          "sha256": "9d8a982cfd45dbb44717c95b91458dd12e4fa75f0440625ff2e47bc9be740074",
+          "sha1": "46038128d0c2bfa350639699a41e30efc685f715",
+          "md5": "600ae4ec05a95a85a98f60ba49f15bae"
         }
       ]
     },
@@ -70,11 +70,11 @@
         {
           "name": "motore-0.19.0.jar",
           "url": "motore-0.19.0.jar",
-          "size": 381797,
-          "sha512": "b988c95c12270d9532feb8d2c9f83f869057e08eb47cfd482d95399e91f95eb214c464ae3484a9c44788e04529801f67f7b5330d3e340166ba53f7d9c91cd2ac",
-          "sha256": "8d79fc73b90564cc56abddfa920677f0347a0aed4baea2203c1fe1e55e9980df",
-          "sha1": "df0069c0a055abfb4f4dbe1f315beabcdff16e6e",
-          "md5": "95ce5f1e0303706505f051d34e4d2cb9"
+          "size": 381873,
+          "sha512": "d914b96c111b5dcdde1cacb74b4bca518400ee10a104e465e284441f12309227711aa3b1352a070a6989e22e5202b8ca85344465af4b753bf99c35614dc49aff",
+          "sha256": "9d8a982cfd45dbb44717c95b91458dd12e4fa75f0440625ff2e47bc9be740074",
+          "sha1": "46038128d0c2bfa350639699a41e30efc685f715",
+          "md5": "600ae4ec05a95a85a98f60ba49f15bae"
         }
       ]
     }
