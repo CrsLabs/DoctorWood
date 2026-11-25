@@ -42,11 +42,11 @@
         {
           "name": "pairwood-0.19.0.aar",
           "url": "pairwood-0.19.0.aar",
-          "size": 240874,
-          "sha512": "c43b5702ee247c37a29821efd433dd883987adf28adadaf203cc640a5760856d10fb708c3757baccb64bc22a4a220b5c579350c8260ee0dfac7996d8931a5edb",
-          "sha256": "4482e2b5d0c9581ede5486c3760c1af5f0ea72137a2d0c38797e27fce0f40f7f",
-          "sha1": "494ebd3cdb9f83a949b0ae05b0bd7a4feddaa927",
-          "md5": "eb9681693b74b06b96febcb12ec24942"
+          "size": 242503,
+          "sha512": "579912881e82211429660a07d69bb104f6e5bf6f2878e78e1045481b42bfa0fc16be44b0917a220275af89fba782308497f8f17f5e060ced3405efe6222ef033",
+          "sha256": "a80e92732466491beac2a3c8678796bf76ea9ffebf9bcc93339c531bc491fa71",
+          "sha1": "c6a7b0aff64446c7bc47fa5eca3811bb338ca794",
+          "md5": "6dfaabf4ee4358eecf29a9c3fa897458"
         }
       ]
     },
@@ -113,11 +113,11 @@
         {
           "name": "pairwood-0.19.0.aar",
           "url": "pairwood-0.19.0.aar",
-          "size": 240874,
-          "sha512": "c43b5702ee247c37a29821efd433dd883987adf28adadaf203cc640a5760856d10fb708c3757baccb64bc22a4a220b5c579350c8260ee0dfac7996d8931a5edb",
-          "sha256": "4482e2b5d0c9581ede5486c3760c1af5f0ea72137a2d0c38797e27fce0f40f7f",
-          "sha1": "494ebd3cdb9f83a949b0ae05b0bd7a4feddaa927",
-          "md5": "eb9681693b74b06b96febcb12ec24942"
+          "size": 242503,
+          "sha512": "579912881e82211429660a07d69bb104f6e5bf6f2878e78e1045481b42bfa0fc16be44b0917a220275af89fba782308497f8f17f5e060ced3405efe6222ef033",
+          "sha256": "a80e92732466491beac2a3c8678796bf76ea9ffebf9bcc93339c531bc491fa71",
+          "sha1": "c6a7b0aff64446c7bc47fa5eca3811bb338ca794",
+          "md5": "6dfaabf4ee4358eecf29a9c3fa897458"
         }
       ]
     }
