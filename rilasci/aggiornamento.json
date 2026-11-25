@@ -1,8 +1,8 @@
 {
  "pacchetto": "it.doctorwood.app",
- "versionCode": 52,
- "versione": "1.2.3",
- "apk": "DoctorWood-1.2.3.apk",
- "sha256": "33905dc2109041d4151f6e26d9e14dd5551283791e689eb772c013d5ad923662",
- "novita": "L'ora degli appuntamenti si sceglie con due ruote, più semplice; finestre che si chiudono senza scatti."
+ "versionCode": 54,
+ "versione": "1.2.5",
+ "apk": "DoctorWood-1.2.5.apk",
+ "sha256": "db242fc7c9ab2e400d924882c1c244787822f32d54db845b934aaf3eab2db4f2",
+ "novita": "Motore di sincronizzazione aggiornato: nomi dei dispositivi sempre aggiornati, controlli di sicurezza più severi sui file ricevuti, correzioni."
 }

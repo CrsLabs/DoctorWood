@@ -1,4 +1,5 @@
 {
+ "v1.2.5": "Sync engine update: device names are kept up to date, stricter safety checks on received files, and fixes.",
  "v1.2.3": "The appointment time is now chosen with two wheels (hours and minutes) and a large readout: simpler and less scattered. Windows and menus close smoothly. DoctorWood keeps its own sync port, so it never clashes with DoctorCar or BothWise.",
  "v1.2.2": "Date and time pickers in the app style, like DoctorCar: they open from the bottom, you choose and confirm; tapping the month lets you pick the year.",
  "v1.2.1": "Notifications now appear at the bottom of the screen and close with a swipe; smoother Settings sections on less powerful phones.",
