@@ -42,11 +42,11 @@
         {
           "name": "pairwood-capacitor-0.19.0.aar",
           "url": "pairwood-capacitor-0.19.0.aar",
-          "size": 41185,
-          "sha512": "c6f15220ef9cf5253ed977fca5911bb378e701fa5b5e38a4b6055e00a6b1c353b12bb336b4af33dba28b595f98ec52ec93c8ca4a26566b5a7795375ea64bf6b2",
-          "sha256": "8396f7327767d086de8d0ea9f0ea8085a145020b49c22c0bfe51f56e7ad19dc4",
-          "sha1": "063da22182922035e0ac56f917b7e3ad0ec8ac6c",
-          "md5": "54f657f56fb7d3e1e0684dd4e131925a"
+          "size": 42379,
+          "sha512": "0d7588f7c8f57efc9ee1e83c4f55b40f6700428f62f48e7afe6cd75a201a48f94a1b44b4288d72331e0ce067a50fcee1d6b98b1c4f65af0f720a2c7c3d42a289",
+          "sha256": "b1b7ed0129a4b01a0387ca1846a68dca4549e3d1ebeb0b5fe51d6b272e6a9644",
+          "sha1": "03e9a494444d8b4cea0b279b7b35f823dcd7f50b",
+          "md5": "ab22954089f35ece29925c8c13693d4c"
         }
       ]
     },
@@ -78,11 +78,11 @@
         {
           "name": "pairwood-capacitor-0.19.0.aar",
           "url": "pairwood-capacitor-0.19.0.aar",
-          "size": 41185,
-          "sha512": "c6f15220ef9cf5253ed977fca5911bb378e701fa5b5e38a4b6055e00a6b1c353b12bb336b4af33dba28b595f98ec52ec93c8ca4a26566b5a7795375ea64bf6b2",
-          "sha256": "8396f7327767d086de8d0ea9f0ea8085a145020b49c22c0bfe51f56e7ad19dc4",
-          "sha1": "063da22182922035e0ac56f917b7e3ad0ec8ac6c",
-          "md5": "54f657f56fb7d3e1e0684dd4e131925a"
+          "size": 42379,
+          "sha512": "0d7588f7c8f57efc9ee1e83c4f55b40f6700428f62f48e7afe6cd75a201a48f94a1b44b4288d72331e0ce067a50fcee1d6b98b1c4f65af0f720a2c7c3d42a289",
+          "sha256": "b1b7ed0129a4b01a0387ca1846a68dca4549e3d1ebeb0b5fe51d6b272e6a9644",
+          "sha1": "03e9a494444d8b4cea0b279b7b35f823dcd7f50b",
+          "md5": "ab22954089f35ece29925c8c13693d4c"
         }
       ]
     }
