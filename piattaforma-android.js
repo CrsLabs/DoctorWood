@@ -955,6 +955,9 @@
       // PairWood: il modulo di sincronizzazione diretta (codice nativo). Cartella privata «laboratorio».
       const pw = (metodo, opz) => CAP.nativePromise('PairWood', metodo, opz || {});
       const CARTELLA_PW = 'laboratorio';
+      // la lingua scelta nell'app vale anche per le notifiche della sincronizzazione (anche ad app chiusa)
+      const dilloAlNativo = () => { try { pw('lingua', { inglese: typeof inglese === 'function' && !!inglese() }).catch(() => {}); } catch (_) { } };
+      window.addEventListener('lingua-cambiata', dilloAlNativo); dilloAlNativo();
       // leggere e scrivere i file della sincronizzazione, qualunque sia il modo
       const pwAvviato = async (metodo, opz) => { await avviaPW(); return pw(metodo, opz); };
       const io = c => diretta(c) ? {

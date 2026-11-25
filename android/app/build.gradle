@@ -59,7 +59,7 @@ dependencies {
     implementation "androidx.camera:camera-view:1.5.3"
     implementation "androidx.camera:camera-extensions:1.5.3"   // HDR del produttore, dove c'è
     implementation "androidx.exifinterface:exifinterface:1.4.2"
-    implementation "pairwood:pairwood-capacitor:0.18.8"   // sincronizzazione diretta (PairWood, codice nostro)
+    implementation "pairwood:pairwood-capacitor:0.19.0"   // sincronizzazione diretta (PairWood, codice nostro)
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"

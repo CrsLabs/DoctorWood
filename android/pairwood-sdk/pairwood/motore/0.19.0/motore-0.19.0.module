@@ -1,0 +1,82 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "pairwood",
+    "module": "motore",
+    "version": "0.19.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "motore-0.19.0.jar",
+          "url": "motore-0.19.0.jar",
+          "size": 381797,
+          "sha512": "b988c95c12270d9532feb8d2c9f83f869057e08eb47cfd482d95399e91f95eb214c464ae3484a9c44788e04529801f67f7b5330d3e340166ba53f7d9c91cd2ac",
+          "sha256": "8d79fc73b90564cc56abddfa920677f0347a0aed4baea2203c1fe1e55e9980df",
+          "sha1": "df0069c0a055abfb4f4dbe1f315beabcdff16e6e",
+          "md5": "95ce5f1e0303706505f051d34e4d2cb9"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "motore-0.19.0.jar",
+          "url": "motore-0.19.0.jar",
+          "size": 381797,
+          "sha512": "b988c95c12270d9532feb8d2c9f83f869057e08eb47cfd482d95399e91f95eb214c464ae3484a9c44788e04529801f67f7b5330d3e340166ba53f7d9c91cd2ac",
+          "sha256": "8d79fc73b90564cc56abddfa920677f0347a0aed4baea2203c1fe1e55e9980df",
+          "sha1": "df0069c0a055abfb4f4dbe1f315beabcdff16e6e",
+          "md5": "95ce5f1e0303706505f051d34e4d2cb9"
+        }
+      ]
+    }
+  ]
+}
